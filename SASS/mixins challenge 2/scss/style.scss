@@ -1,0 +1,44 @@
+$list1: green, yellow;
+$list2: rgb(207, 131, 144), rgb(158, 99, 99) ,grey, black;
+$list3:rgb(43, 43, 94), rgb(60, 60, 160) ,purple, hsl(350, 16%, 43%), rgb(255, 206, 214), white;
+section {
+    height: 50vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+
+@mixin my-transition() {
+    transition: right 500ms ease-out, background 1000ms ease-in;
+}
+@mixin my-gradient($colors...) {
+    background: linear-gradient(to top left, $colors);
+}
+.transition-box {
+    background: pink;
+    padding: .5em;
+    position: absolute;
+    text-align: center;
+    top: 2em;
+    bottom: 2em;
+    left: 2em;
+    right: 2em;
+    // Your transition @include goes here
+    @include my-transition();
+}
+.challenge-part-one{
+    @include my-gradient($list1);
+}
+.challenge-part-two{
+    @include my-gradient($list2);
+}
+.challenge-part-three{
+    @include my-gradient($list3);
+}
+.transition-box:hover {
+    background: lightblue;
+    right: 50%;
+}

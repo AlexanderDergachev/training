@@ -1,0 +1,21 @@
+.wrapper__logos {
+    width: 100%;
+    background: #fff;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    padding: 108px 0;
+
+    @include mq(mid) {
+        padding: 20px 0;
+    }
+
+    & img {
+        width: 100%;
+        max-width: 1133px;
+        height: auto;
+    }
+
+}

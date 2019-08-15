@@ -1,0 +1,2 @@
+width: (700 / 1280) *100%;   <--------------------> percent of your block width,
+profit! 

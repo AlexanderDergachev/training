@@ -1,0 +1,48 @@
+$primary: #80A1D4;
+$secondary: #475B5A;
+$accent: #75C9C8;
+$black: #232020; 
+
+body {
+  display: flex;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.one, .two, .three {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.one { content: lightness($black)}
+
+@function dynamic-color($color){
+  @if lightness($color) > 50 {
+    @return rgba($black, .75);
+  } @else {
+    @return rgba(white, 75);
+  }
+}
+
+@mixin dc($color) {
+  background: $color;
+  color: dynamic-color($color);
+}
+.one{
+  @include dc($primary)
+}
+.two{
+  @include dc($secondary)
+}
+.three{
+  @include dc($accent)
+}
+// @functions
+
+
+

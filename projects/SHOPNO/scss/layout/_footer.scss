@@ -1,0 +1,50 @@
+.footer {
+    text-align: center;
+    background: #262b2e;
+    width: 100%;
+
+    &__title {
+        padding-top: 93px;
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.16px;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    &__logos-container {
+        display: flex;
+        margin: 0 auto;
+        margin-top: 20px;
+        width: (180px + 47);
+        justify-content: space-between;
+    }
+
+    &__logo {
+        background: #8d8d8d;
+        opacity: 0.4;
+        padding: 5px 10px;
+        margin-left: 7px;
+
+        &:hover {
+            background: $main-blue;
+            opacity: 1;
+
+        }
+
+        & img {
+            position: relative;
+            top: 2px;
+            height: 25px;
+            width: 25px;
+        }
+    }
+
+    &__rights {
+        color: rgba(255, 255, 255, 0.4);
+        padding-top: 43px;
+        line-height: 1.56;
+        letter-spacing: 0.16px;
+        font-weight: 500;
+        padding-bottom: 89px;
+    }
+}

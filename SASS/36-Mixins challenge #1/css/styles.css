@@ -1,0 +1,37 @@
+body {
+  font-size: 3rem;
+  padding: 0;
+  margin: 0; }
+
+.section-one,
+.section-two,
+.section-three {
+  text-align: center;
+  padding: 25vh 0; }
+
+.section-one {
+  background: linear-gradient(45deg, green, yellow); }
+
+.section-two {
+  background: linear-gradient(50deg, yellow, blue); }
+
+.section-three {
+  background: linear-gradient(10deg, #9e5895, #4e1e1e); }
+
+.title::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 70px;
+  height: 5px;
+  background-color: #3f7788; }
+
+.button-one, .button-two, .button-three {
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: .75em 1.5em;
+  color: black;
+  background-color: white; }
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,48 @@
+body {
+  font-size: 3rem;
+  padding: 0;
+  margin: 0;
+}
+
+.section-one,
+.section-two,
+.section-three {
+  text-align: center;
+  padding: 25vh 0;
+}
+
+@mixin gradient($param: 50deg, $color1: yellow, $color2: blue){
+  background: linear-gradient($param, $color1, $color2);
+}
+@mixin after-mixin($width: 70px, $height: 5px, $color: rgb(63, 119, 136)){
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: $width;
+  height: $height;
+  background-color: $color;
+}  
+@mixin button($color, $bg_color) {
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: .75em 1.5em;
+  color: $color;
+  background-color: $bg-color;
+}
+
+.section-one{
+  @include gradient(45deg,green, yellow)
+}
+.section-two{
+  @include gradient()
+}
+.section-three{
+  @include gradient(10deg, rgb(158, 88, 149), rgb(78, 30, 30))
+}
+.title::after{
+  @include after-mixin();
+}
+.button-one, .button-two, .button-three{
+  @include button(black, white);
+}

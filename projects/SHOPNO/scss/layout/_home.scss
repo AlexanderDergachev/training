@@ -1,0 +1,94 @@
+.wrapper__home {
+    width: 100%;
+    background: $bg-gray;
+}
+
+.home {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 64px;
+    min-height: 806px;
+    // height: 100vh;
+    background: $bg-gray;
+
+    @include mq(small) {
+        min-height: 750px;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        padding-top: 196px;
+        padding-bottom: 139px;
+        line-height: 60px;
+
+        @include mq(mid) {
+            padding-top: (196px / 2);
+            padding-bottom: (139px / 2);
+        }
+
+        @include mq(small) {
+            font-size: 43px;
+            padding-top: (196px / 3);
+            padding-bottom: (139px / 3);
+        }
+    }
+
+    &__logo {
+        letter-spacing: 1.02px;
+        line-height: 28px;
+        padding: 3.5px 7.5px;
+        border: solid 5.5px $border-black;
+        color: $border-black;
+        font-size: 17px;
+        font-weight: bold;
+        font-family: $ff-title;
+        text-transform: $tt;
+        margin-left: (150 / 1440 * 100%);
+
+        & span {
+            color: $main-blue;
+            font-size: 20px;
+        }
+    }
+
+    &__button {
+        font-size: 18px;
+        letter-spacing: 2.28px;
+        font-family: $ff-title;
+        color: $title-black;
+        border: solid 2px $border-black;
+        padding: 13.5px 42px;
+        text-transform: $tt;
+        font-weight: bold;
+        margin-bottom: 200px;
+
+        &:hover {
+            transition: box-shadow 300ms, border 300ms;
+            box-shadow: 0 0 15px $main-blue;
+            border: solid $main-blue;
+        }
+    }
+
+    & img {
+        position: absolute;
+        right: (243 / 1440 * 100%);
+
+        @include mq(mid) {
+            display: none;
+        }
+    }
+}
+
+#burger {
+    font-size: 32px;
+    font-weight: bold;
+    color: $title-black;
+    margin-right: (152 / 1440 * 100%);
+}

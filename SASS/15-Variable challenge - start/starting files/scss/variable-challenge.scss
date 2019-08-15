@@ -1,0 +1,72 @@
+/* =|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
+
+   Colors you can use: 
+   #938581  #75C9C8  #FCFFFD
+
+=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
+
+   All colors, the box-shadow, and the border-radius
+   must be set-up as variables.
+
+=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=| */
+
+$my-brown: #938581;
+$my-blue: #75C9C8;
+$my-white: #FCFFFD;
+$my-border-radius: 10px;
+ 
+* { box-sizing: border-box; }
+
+body {
+  font-size: 18px;
+  font-family: sans-serif;
+  line-height: 1.6;
+
+  /* this is being used to center the card on the screen */
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 60%;
+  padding: 2em;
+  border: 5px;
+  border-radius: $my-border-radius;
+  box-shadow: 0 0 15px $my-brown; 
+  &__title{
+    color: $my-brown;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 45px;
+  text-decoration: none;
+  /* button styles start here */
+  transition: box-shadow 150ms, background-color 150ms;
+  border: 2px solid $my-brown;
+  border-radius: $my-border-radius;
+  &__primary{
+    background-color: $my-brown;
+    color: $my-white;
+    &:hover{
+      background-color: $my-blue;
+      box-shadow: 0 0 15px $my-blue;
+    }
+  }
+  &__outline{
+    color: $my-brown;
+    &:hover{
+      color: $my-white;
+      background-color: $my-blue;
+      box-shadow: 0 0 15px $my-blue;
+    }
+  }
+  &:hover{
+    border-color: $my-blue;
+  }
+
+  /* button styles end here */
+}

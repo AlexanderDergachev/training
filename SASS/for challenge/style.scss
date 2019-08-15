@@ -1,0 +1,7 @@
+$clr-primary: #2a1b5b;
+
+@for $i from 0 to 5 {
+    .clr-primary-#{$i + 1}{
+            background: lighten($color: $clr-primary, $amount: $i * 10);
+    }
+}

@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  height: 100vh;
+  padding: 0;
+  margin: 0; }
+
+.one, .two, .three {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: sans-serif; }
+
+.one {
+  content: 13.137254902%; }
+
+.one {
+  background: #80A1D4;
+  color: rgba(35, 32, 32, 0.75); }
+
+.two {
+  background: #475B5A;
+  color: white; }
+
+.three {
+  background: #75C9C8;
+  color: rgba(35, 32, 32, 0.75); }
+
+/*# sourceMappingURL=style.css.map */

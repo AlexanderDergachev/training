@@ -1,0 +1,58 @@
+/* =|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
+
+   Colors you can use: 
+   #938581  #75C9C8  #FCFFFD
+
+=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|
+
+   All colors, the box-shadow, and the border-radius
+   must be set-up as variables.
+
+=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=|=| */
+* {
+  box-sizing: border-box; }
+
+body {
+  font-size: 18px;
+  font-family: sans-serif;
+  line-height: 1.6;
+  /* this is being used to center the card on the screen */
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center; }
+
+.card {
+  width: 60%;
+  padding: 2em;
+  border: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #938581; }
+  .card__title {
+    color: #938581; }
+
+.btn {
+  display: inline-block;
+  padding: 15px 45px;
+  text-decoration: none;
+  /* button styles start here */
+  transition: box-shadow 150ms, background-color 150ms;
+  border: 2px solid #938581;
+  border-radius: 10px;
+  /* button styles end here */ }
+  .btn__primary {
+    background-color: #938581;
+    color: #FCFFFD; }
+    .btn__primary:hover {
+      background-color: #75C9C8;
+      box-shadow: 0 0 15px #75C9C8; }
+  .btn__outline {
+    color: #938581; }
+    .btn__outline:hover {
+      color: #FCFFFD;
+      background-color: #75C9C8;
+      box-shadow: 0 0 15px #75C9C8; }
+  .btn:hover {
+    border-color: #75C9C8; }
+
+/*# sourceMappingURL=variable-challenge.css.map */

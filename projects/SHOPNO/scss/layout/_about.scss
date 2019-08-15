@@ -1,0 +1,128 @@
+.wrapper__about {
+    width: 100%;
+    background: $bg-lightgray;
+}
+
+.about {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background: $bg-lightgray;
+
+    &__title {
+        padding-top: 129px;
+        text-align: center;
+
+        @include mq(small) {
+            padding-top: (129px / 2);
+        }
+    }
+
+    &__subtitle {
+        text-align: center;
+        padding-top: 17px;
+    }
+
+    &__container {
+        display: flex;
+        padding-bottom: 143px;
+
+        @include mq(mid) {
+            flex-direction: column;
+        }
+
+        @include mq(small) {
+            padding-bottom: (143px / 2);
+        }
+    }
+
+    &__carousel-container {
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            width: 44px;
+            height: 412px;
+            background: $bg-gray;
+            position: absolute;
+            left: 186px;
+            top: 182px;
+
+            @include mq(big) {
+                display: none;
+            }
+        }
+
+        &::after {
+            left: 622px;
+            top: 182px;
+        }
+    }
+
+    & .owl-carousel {
+        width: 392px;
+        height: auto;
+        padding-top: 147px;
+        margin-left: 230px;
+
+        & .owl-dots .owl-dot span {
+            border-radius: 3px;
+            width: 10px;
+            height: 10px;
+            margin: 3px;
+        }
+
+        & .owl-dots .owl-dot.active span {
+            background: $main-blue;
+        }
+
+        & .owl-dots {
+            position: relative;
+            top: 33px;
+        }
+
+        @include mq(big) {
+            margin-left: (230px / 3);
+        }
+
+        @include mq(mid) {
+            margin: 0 auto;
+            padding-top: (147px / 1.5);
+        }
+
+        @include mq(small) {
+            padding-top: (147px / 2);
+            width: (392px / 1.5);
+        }
+    }
+
+    &__section {
+        max-width: 445px;
+        height: auto;
+        margin-left: (154 / 1440 * 100%);
+        text-align: left;
+        padding-top: 152px;
+
+        @include mq(mid) {
+            margin: 0 auto;
+            padding-top: (152px / 2);
+        }
+
+        @include mq(small) {
+            max-width: (445px * 0.7);
+        }
+    }
+
+    &__par1 {
+        padding-top: 31px;
+    }
+
+    &__par2 {
+        padding-top: 27px;
+    }
+
+    &__par-title2 {
+        padding-top: 38px;
+    }
+}

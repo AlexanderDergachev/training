@@ -1,0 +1,63 @@
+h1 {
+    letter-spacing: 2.7px;
+    text-shadow: $ts;
+    font-size: 45px;
+    text-transform: $tt;
+    font-family: $ff-title;
+    font-weight: bold;
+    color: $title-black;
+    line-height: 28px;
+
+    & span {
+        background-color: $main-blue;
+    }
+}
+
+h2 {
+    font-size: 38px;
+    line-height: 28px;
+    font-family: $ff-title;
+    letter-spacing: 2.28px;
+    color: $title-black;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-family: $ff-subtitle;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 1.08px;
+    color: rgba(0, 0, 0, 0.62);
+    text-transform: uppercase;
+    opacity: 0.62;
+}
+
+h4 {
+    font-family: $ff-subtitle;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.75);
+    line-height: 1.4;
+}
+
+h5 {
+    font-family: $ff-subtitle;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 1.45;
+    letter-spacing: 1px;
+}
+
+p {
+    font-family: $ff-main;
+    font-size: 16px;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.74);
+    line-height: 1.75;
+}
