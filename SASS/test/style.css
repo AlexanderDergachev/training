@@ -1,0 +1,171 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    text-align: center;
+}
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  /* отображаем курсор в виде руки при наведении; некоторые
+    считают, что необходимо оставлять стрелочный вид для кнопок */
+    cursor: pointer;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 80%;
+    margin: 0 auto;
+    padding-top: 100px;
+
+}
+.elem{
+    width: 300px;
+    height: 400px;
+    background: #dbdb69;
+}
+.main {
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 166, 0) , rgb(255, 255, 0), rgb(0, 128, 0), rgb(0, 0, 255), rgb(235, 126, 235));
+    height: 100vh;
+}
+.greetings { 
+    font-family: sans-serif;
+    font-size: 24px;
+}
+
+.secondary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.secondary div {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.scroll {
+    padding: 20px;
+    border-radius: 50px;
+    background: coral;
+    margin-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 0;
+    margin-bottom: 50px;
+    transition: transform 700ms;
+    cursor: pointer;
+}
+
+
+.scroll:hover {
+    transform: scale(1.5);
+}
+
+#text {
+    display: inline-block;
+    padding-top: 20px;
+    transition: transform 1000ms;
+    cursor: pointer;
+}
+#text:hover {
+    transform: scale(1.2);
+}
+.size_button {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    background: rgb(245, 156, 124);
+    border-radius: 50%;
+    font-family: sans-serif;
+    transition: background 1000ms, color 1000ms;
+    text-transform: uppercase;
+}
+.size_button:focus {
+    outline: none;
+}
+.size_button:hover {
+    background: rgb(68, 122, 54);
+    color: #fff;
+    font-weight: bold;
+}
+.size_button__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    min-height: 170px;
+}
+.client-size {
+    font-size:40vh;
+    position: absolute;
+    top: 120%;
+    font-family: sans-serif;
+}
+.event-test {
+    padding-top: 30px;
+}
+.b-circle {
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+}
+.b-circle__red {
+    border: 3px solid red;
+    position: absolute;
+    left: 900px;
+    top: 30px;
+}
+.b-circle__blue {
+    border: 3px solid blue;
+    position: absolute;
+    left: 200px;
+    top: 100px;
+}
+.b-circle__yellowgreen {
+    border: 3px solid yellowgreen;
+    position: absolute;
+    top: 150px;
+    left: 480px;
+}
+.circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+.circle__blue {
+    background: blue;
+    position: absolute;
+    left: 630px;
+    top: 400px;
+}
+.circle__red {
+    background: red;
+    position: absolute;
+    left: 450px;
+    top: 320px
+}
+.circle__yellowgreen {
+    background: yellowgreen;
+    position: absolute;
+    bottom: 100px;
+    left: 450px;
+}
+.third {
+    min-height: 100vh; 
+    position: relative;   
+}
+.ball {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #dbdb69;
+}
