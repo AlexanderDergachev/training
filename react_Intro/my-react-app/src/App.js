@@ -8,7 +8,8 @@ class App extends Component {
         id: uuid(),
         title: '',
         editItem: false,
-        editedItemIndex: 0
+        editedItemIndex: 0,
+        chekedItemsCount: 0,
     }
     handleChange = (e) => {
         this.setState({
@@ -69,6 +70,13 @@ class App extends Component {
             editItem: true
         });   
     }
+    showCheked = () => {
+        console.log(this.state.items);
+        
+        for (let elem of this.state.items) {
+            console.log(elem.cheked);
+        }
+    }
     render() {
         return (
             <div className="wrapper">
@@ -76,6 +84,7 @@ class App extends Component {
                 <div className="main">
                     <Todoinput title={this.state.title} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                     <Todolist items={this.state.items} handleDelete={this.handleDelete}  handleEdit={this.handleEdit} />
+                    {/* <button onClick={this.showCheked}>clear</button> */}
                 </div>
             </div>      
         );
