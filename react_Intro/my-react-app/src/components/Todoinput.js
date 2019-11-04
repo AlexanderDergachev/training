@@ -10,13 +10,13 @@ export default class Todoinput extends Component {
         this.myRef.current.focus();
     }
     render() {
-        const {title, handleChange, handleSubmit} = this.props;
-        
+        const { title, handleChange, handleSubmit } = this.props;
+
         return (
             <React.Fragment>
                 <form onSubmit={handleSubmit} >
                     <input ref={this.myRef} name="test" className="main-input" type="text"
-                     placeholder="What needs to be done?" value={title} onChange={handleChange} />
+                        placeholder="What needs to be done?" value={title} onChange={handleChange} />
                     <button className="add-icon"><img src={logo} alt={logo} /></button>
                 </form>
             </React.Fragment>

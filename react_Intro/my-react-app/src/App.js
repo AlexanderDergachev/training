@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Todolist from "./components/Todolist";
 import Todoinput from "./components/Todoinput";
 import uuid from "uuid";
@@ -16,11 +16,11 @@ class App extends Component {
         });
     }
     componentDidMount() {
-        if (localStorage.getItem('data')){
+        if (localStorage.getItem('data')) {
             let data = JSON.parse(localStorage.getItem('data'));
             this.setState({
                 items: data
-            })            
+            })
         }
     }
     handleSubmit = (e) => {
@@ -28,7 +28,7 @@ class App extends Component {
 
         const newItem = {
             id: this.state.id,
-            title: this.state.title, 
+            title: this.state.title,
             isChecked: this.state.isChecked
         }
         let updatedItems = [];
@@ -39,8 +39,7 @@ class App extends Component {
         } else {
             updatedItems = [...this.state.items, newItem];
         }
-        
-        
+
         this.setState({
             items: updatedItems,
             title: '',
@@ -48,7 +47,7 @@ class App extends Component {
             editItem: false
         });
         localStorage.setItem('data', JSON.stringify(updatedItems));
-        
+
 
     }
     handleDelete = id => {
@@ -57,19 +56,18 @@ class App extends Component {
             items: filteredItems
         });
         localStorage.setItem('data', JSON.stringify(filteredItems));
-        console.log(this.state.inputRef);
-        
+
     }
     handleEdit = id => {
         const filteredItems = this.state.items.filter(item => item.id !== id);
         const selectedItem = this.state.items.find(item => item.id === id);
-        
+
         this.setState({
             items: filteredItems,
             title: selectedItem.title,
             editedItemIndex: this.state.items.indexOf(selectedItem),
             editItem: true
-        });   
+        });
     }
     render() {
         return (
@@ -77,12 +75,12 @@ class App extends Component {
                 <h1 className="app-title">React Todos</h1>
                 <div className="main">
                     <Todoinput getInputRef={this.getInputRef} title={this.state.title} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-                    <Todolist items={this.state.items} 
-                              handleDelete={this.handleDelete}  
-                              handleEdit={this.handleEdit} 
+                    <Todolist items={this.state.items}
+                        handleDelete={this.handleDelete}
+                        handleEdit={this.handleEdit}
                     />
                 </div>
-            </div>      
+            </div>
         );
     }
 }
