@@ -7,11 +7,8 @@ class App extends Component {
         items: [],
         id: uuid(),
         title: '',
-        isChecked: false,
         editItem: false,
         editedItemIndex: 0,
-        chekedItemsCount: 0,
-        checkedItems: [],
     }
     handleChange = (e) => {
         this.setState({
@@ -60,6 +57,7 @@ class App extends Component {
             items: filteredItems
         });
         localStorage.setItem('data', JSON.stringify(filteredItems));
+        console.log(this.state.inputRef);
         
     }
     handleEdit = id => {
@@ -73,33 +71,16 @@ class App extends Component {
             editItem: true
         });   
     }
-    toggleChecked = () => {
-        console.log();
-
-        const checkedItems = this.state.items.filter(item => item.isChecked === true);
-        
-        // this.setState({
-        //     checkedItems: [...this.state.checkedItems, e.target]
-        // });
-    }
-    showCheked = () => {
-        console.log(this.state.checkedItems);
-        
-        // for (let elem of this.state.items) {
-        //     console.log(elem.cheked);
-        // }
-    }
     render() {
         return (
             <div className="wrapper">
                 <h1 className="app-title">React Todos</h1>
                 <div className="main">
-                    <Todoinput title={this.state.title} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+                    <Todoinput getInputRef={this.getInputRef} title={this.state.title} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                     <Todolist items={this.state.items} 
                               handleDelete={this.handleDelete}  
                               handleEdit={this.handleEdit} 
-                              toggleChecked={this.toggleChecked} />
-                    <button onClick={this.showCheked}>clear</button>
+                    />
                 </div>
             </div>      
         );
