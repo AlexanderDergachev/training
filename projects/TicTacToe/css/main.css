@@ -152,29 +152,40 @@ h1 span {
 }
 
 @media (max-width: 420px) {
-  .button-container{
-    width: 120%;
-  }
   .restart-button {
     margin: 0 auto;
     margin-top: 20px;
   }
+  .button-container{
+    padding-left: 10%;
+  }
   .info {
     margin-top: 5px;
-    width: 120%;
   }
   .info__container {
     margin: 0 auto;
-    padding-left: 45px;
+    padding-left: 95px;
     margin-top: 30px;
 
   }.info__sub {
     margin-right: 20px;
   }
+  .tie {
+    padding-top: 28px;
+  }
+}
+@media (max-width: 375px) {
+  .info__container {
+    padding-left: 135px;
+  }
 }
 @media (max-width: 360px) {
   .info__container {
-    padding-left: 75px;
+    padding-left: 155px;
+  }
+  .button-container{
+    padding-left: 22%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
