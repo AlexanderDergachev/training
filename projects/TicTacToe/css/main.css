@@ -72,7 +72,7 @@ h1 span {
   margin: 0 auto;
   min-width: 43%;
   justify-content: space-around;
-  margin-left: 55px;
+  padding-left: 45px;
 }
 
 .info__sub {
@@ -165,12 +165,16 @@ h1 span {
   }
   .info__container {
     margin: 0 auto;
-    padding-left: 50px;
+    padding-left: 45px;
     margin-top: 30px;
 
   }.info__sub {
     margin-right: 20px;
   }
+}
+@media (max-width: 360px) {
+  .info__container {
+    padding-left: 75px;
 }
 
 /*# sourceMappingURL=main.css.map */
