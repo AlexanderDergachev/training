@@ -16,7 +16,7 @@ export default class Todoinput extends Component {
             <React.Fragment>
                 <form onSubmit={handleSubmit} >
                     <input ref={this.myRef} name="test" className="main-input" type="text"
-                        placeholder="What needs to be done?" value={title} onChange={handleChange} />
+                        placeholder="What needs to be done?" value={title} onChange={handleChange} autoComplete="off" />
                     <button className="add-icon"><img src={logo} alt={logo} /></button>
                 </form>
             </React.Fragment>
