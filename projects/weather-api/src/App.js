@@ -44,16 +44,11 @@ export default class App extends Component {
 
   }
   render() {
-    if (this.state.redirect) {
-      return (
-        <BrowserRouter>
-          {<Redirect path="/" to={`/:${this.state.city}`} />}
-        </BrowserRouter>
-      )
-    } else return (
+ return (
       <div className="main">
         <BrowserRouter >
-          <Route exact path="/" render={() => <WeatherInput error={this.state.error} getWeather={this.getWeather} />} />
+          <Route exact path="/" render={() => (this.state.redirect ? (<Redirect push to={`/:${this.state.city}`} />) :
+            (<WeatherInput error={this.state.error} getWeather={this.getWeather}></WeatherInput>))} />
           <Route exact path="/:city" component={() => <Weather
             city={this.state.city}
             country={this.state.country}
