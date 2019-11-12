@@ -44,12 +44,12 @@ export default class App extends Component {
 
   }
   render() {
- return (
+    return (
       <div className="main">
         <BrowserRouter >
           <Route exact path="/" render={() => (this.state.redirect ? (<Redirect push to={`/:${this.state.city}`} />) :
             (<WeatherInput error={this.state.error} getWeather={this.getWeather}></WeatherInput>))} />
-          <Route exact path="/:city" component={() => <Weather
+          <Route exact path="/:city" render={() => <Weather
             city={this.state.city}
             country={this.state.country}
             temperature={this.state.temperature}
