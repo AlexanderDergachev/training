@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Droppable } from 'react-beautiful-dnd';
 
 export default class BoardCreator extends Component {
     state = {
