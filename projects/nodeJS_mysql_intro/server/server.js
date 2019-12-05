@@ -20,25 +20,52 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 
-const db = mysql.createConnection({
+// const db = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     database: "shop",
+//     password: ""
+// });
+
+const pool = mysql.createPool({
+    connectionLimit: 5,
     host: "localhost",
     user: "root",
     database: "shop",
     password: ""
 });
 
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('connected');
-});
+// db.connect((err) => {
+//     if (err) {
+//         throw err;
+//     }
+//     console.log('connected');
+// });
 
 
 
 app.get('/promo', (req, res) => {
     let sql = 'SELECT * FROM promocode';
-    let query = db.query(sql, (err, result) => {
+    let query = pool.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send(JSON.stringify(result));
+    })
+})
+
+app.get('/product', (req, res) => {
+    let sql = 'SELECT * FROM product';
+    let query = pool.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send(JSON.stringify(result));
+    })
+})
+
+app.get('/product/:id', (req, res) => {
+    let sql = 'SELECT * FROM product WHERE id=?';
+    const id = req.params.id;
+    let query = pool.query(sql, [id], (err, result) => {
         if (err) throw err;
         console.log(result);
         res.send(JSON.stringify(result));
@@ -46,5 +73,5 @@ app.get('/promo', (req, res) => {
 })
 
 app.listen(8080, function () {
-    console.log("Сервер ожидает подключения...");
+    console.log("connected");
 });
