@@ -63,7 +63,7 @@ app.get('/product', (req, res) => {
 })
 
 app.get('/product/:id', (req, res) => {
-    let sql = 'SELECT * FROM product WHERE id=?';
+    let sql = 'Select p.id, p.path, p.name, p.price, p.category, p.availability, b.name, m.name as model_name, bo.date, pr.value, pr.discount FROM product p, brand b, model m, booking bo, promocode pr WHERE p.brand_id = b.id AND p.model_id = m.id AND p.booking_id = bo.id AND p.promocode_id = pr.id AND p.id = ?';
     const id = req.params.id;
     let query = pool.query(sql, [id], (err, result) => {
         if (err) throw err;
@@ -71,6 +71,8 @@ app.get('/product/:id', (req, res) => {
         res.send(JSON.stringify(result));
     })
 })
+
+
 
 app.listen(8080, function () {
     console.log("connected");

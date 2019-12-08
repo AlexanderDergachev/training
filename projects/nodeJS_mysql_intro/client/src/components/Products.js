@@ -6,12 +6,10 @@ export default class Products extends Component {
         isLoading: true
     }
     componentDidMount() {
-        setTimeout(() => {
-            fetch('http://localhost:8080/product')
-                .then(responce => responce.json())
-                .then(data => this.setState({ products: data }))
-            this.setState({ isLoading: false })
-        }, 1000);
+        fetch('http://localhost:8080/product')
+            .then(responce => responce.json())
+            .then(data => this.setState({ products: data }))
+        this.setState({ isLoading: false })
     }
     render() {
         return (
