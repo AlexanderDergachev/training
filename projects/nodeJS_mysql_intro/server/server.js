@@ -1,11 +1,15 @@
 const mysql = require("mysql2");
 const express = require("express");
 const bodyParser = require("body-parser");
+const jwt = require('jsonwebtoken');
 var cors = require('cors');
 const app = express();
-const urlencodedParser = bodyParser.urlencoded({
-    extended: false
-});
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
 
 
 var whitelist = ['http://localhost:3000', 'http://localhost:5000'];
@@ -42,14 +46,29 @@ const pool = mysql.createPool({
 //     console.log('connected');
 // });
 
-
+app.post('/registration', function (req, res) {
+    if(!req.body) return res.sendStatus(400);
+    console.log(req.body);
+    
+    const name = req.body.user.name;
+    const surname = req.body.user.surname;
+    const email = req.body.user.email;
+    const phone_number = req.body.user.phone_number;
+    const password = req.body.user.password;
+    let sql = 'INSERT INTO information (name, surname, email, phone_number, password) VALUES (?,?,?,?,?)'
+    pool.query(sql, [name, surname, email, phone_number, password], function(err, data) {
+    });
+    let sql2 = 'INSERT INTO purchaser SET information_id = (SELECT id FROM information WHERE name = ?)'
+    pool.query(sql2, [name], function(err, data) {
+        res.sendStatus('200')
+    });
+});
 
 app.get('/promo', (req, res) => {
     let sql = 'SELECT * FROM promocode';
     let query = pool.query(sql, (err, result) => {
         if (err) throw err;
-        console.log(result);
-        res.send(JSON.stringify(result));
+        res.json(result);
     })
 })
 
@@ -57,8 +76,7 @@ app.get('/product', (req, res) => {
     let sql = 'SELECT * FROM product';
     let query = pool.query(sql, (err, result) => {
         if (err) throw err;
-        console.log(result);
-        res.send(JSON.stringify(result));
+        res.json(result);
     })
 })
 
@@ -67,7 +85,6 @@ app.get('/product/:id', (req, res) => {
     const id = req.params.id;
     let query = pool.query(sql, [id], (err, result) => {
         if (err) throw err;
-        console.log(result);
         res.send(JSON.stringify(result));
     })
 })

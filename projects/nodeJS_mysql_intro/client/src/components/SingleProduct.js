@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 export default class SingleProduct extends Component {
     state = {
-        product: null
+        product: null,
     }
     componentDidMount() {
         const id = this.props.match.params.id;
@@ -11,12 +11,21 @@ export default class SingleProduct extends Component {
             .then(data => this.setState({ product: data }))
     }
     addProduct = () => {
-        console.log('hui');
-        
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        if (cart === null) {
+            localStorage.setItem('cart', JSON.stringify([]));
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        const newProduct = {
+            id: this.state.product[0].id + Math.random(),
+            name: `${this.state.product[0].name} ${this.state.product[0].model_name}`,
+            price: this.state.product[0].price,
+            path: this.state.product[0].path
+        }
+        cart.push(newProduct);
+        localStorage.setItem('cart', JSON.stringify(cart));
     }
     render() {
-        console.log(this.state.product);
-
         return (
             <div className="single">
                 {
@@ -31,8 +40,11 @@ export default class SingleProduct extends Component {
                                     this.state.product[0].availability ? <h2>available</h2> : <h2>not available</h2>
                                 }
                                 <h2 className="single__price">{this.state.product[0].price} &#8372;</h2>
-                                <button onClick={this.addProduct} className="m_button single__buy">Add to cart</button>
-                                <Link className="single__back m__back" to="/">Back</Link>
+                                {
+                                    this.state.product[0].availability === 0 ? (<button className="m_button single__buy single__cant-buy ">Add to cart</button>) :
+                                        (<button onClick={this.addProduct} className="m_button single__buy">Add to cart</button>)
+                                }
+                                <Link className="single__back m__back" to="/">&#8592; Back</Link>
                             </div>
                         </React.Fragment>
                     )

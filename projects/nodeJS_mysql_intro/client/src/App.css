@@ -226,6 +226,7 @@ body {
     font-weight: normal;
 }
 
+
 .m_button {
     outline: none;
     background-color: transparent;
@@ -236,18 +237,28 @@ body {
     border-radius: 14px;
     border-color: rgb(5, 5, 56);
     transition: background 0.2s, color 0.2s;
+    cursor: pointer;
 }
 .m_button:hover {
     color: #fff;
     background: rgb(5, 5, 56);
 }
 
-.single__buy {
+.single__buy, .single__cant-buy {
     font-size: 72px;
     padding: 20px;
     /* margin-right: 140px; */
     margin-top: 30px;
     margin-left: 50px;
+}
+
+.single__cant-buy {
+    color: red;
+    cursor: initial;
+}
+.single__cant-buy:hover {
+    color: red;
+    background: #fff;
 }
 
 .m__back {
@@ -258,4 +269,97 @@ body {
     position: relative;
     top: 130px;
     color: rgb(5, 5, 56);
+}
+.cart {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    min-height: 87vh;
+}
+.cart__product {
+    border: 4px solid rgb(27, 27, 104);
+    padding: 5px;
+    margin: 5px;
+    min-width: 50%;
+    border-radius: 8px;
+    min-height: 100px;
+    margin-bottom: 30px;
+    user-select: none;
+}
+.cart__img {
+    width: 90px;
+    height: 90px;
+}
+
+.cart__product-name,.cart__product-price {
+    font-size: 40px;
+    text-decoration: none;
+    position: relative;
+    color: rgb(27, 27, 104);
+    top: -25px;
+    margin-left: 4%;
+}
+.cart__total {
+    color: rgb(27, 27, 104);
+    font-weight: normal;
+    font-size: 50px;
+    padding-bottom: 30px;
+}
+
+.cart__trash { 
+    cursor: pointer;
+    width: 50px;
+    position: relative;
+    float: right;
+    top: 24px;
+    right: 10px;
+    transition: transform 0.2s;
+}
+
+.cart__trash:hover {
+    transform: scale(1.2);
+}
+
+.registration {
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 30%;
+    border: 4px solid rgb(5, 5, 56);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    color: rgb(5, 5, 56);
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.registration__label {
+    font-size: 30px;
+    padding-left: 18px;
+    padding-top: 5px;
+}
+.registration__input {
+    width: 90%;
+    margin: 0 auto;
+    min-height: 40px;
+    border-radius: 6px;
+    outline: none;
+    border: 4px solid rgb(5, 5, 56);
+    padding-top: 5px;
+    font-size: 30px;
+    padding-left: 15px;
+
+}
+.registration__title {
+    font-size: 40px;
+    padding-left: 18px;
+
+}
+.registration__button {
+    padding: 20px;
+    max-width: 80%; 
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
