@@ -11,19 +11,21 @@ export default class SingleProduct extends Component {
             .then(data => this.setState({ product: data }))
     }
     addProduct = () => {
+        const newProduct = {
+            id: this.state.product[0].id + Math.random(),
+            name: `${this.state.product[0].name} ${this.state.product[0].model_name}`,
+            price: this.state.product[0].price,
+            path: this.state.product[0].path,
+            count: 1
+        }
         let cart = JSON.parse(localStorage.getItem('cart'));
         if (cart === null) {
             localStorage.setItem('cart', JSON.stringify([]));
             cart = JSON.parse(localStorage.getItem('cart'));
         }
-        const newProduct = {
-            id: this.state.product[0].id + Math.random(),
-            name: `${this.state.product[0].name} ${this.state.product[0].model_name}`,
-            price: this.state.product[0].price,
-            path: this.state.product[0].path
-        }
         cart.push(newProduct);
         localStorage.setItem('cart', JSON.stringify(cart));
+        // this.props.history.push("/")
     }
     render() {
         return (

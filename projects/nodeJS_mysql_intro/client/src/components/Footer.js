@@ -7,7 +7,7 @@ export default function Footer() {
             <div className="footer__social-container">
                 <a href="https://github.com/dergachev456" className="footer__social">dergachev456</a>
                 <a href="https://github.com/alejinjer" className="footer__social">alejinjer</a>
-                <a href="/" className="footer__social">yakov</a>
+                <a href="https://github.com/crydevil" className="footer__social">crydevil</a>
             </div>
         </div>
     )

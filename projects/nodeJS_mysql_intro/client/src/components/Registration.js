@@ -24,23 +24,6 @@ export default class Registration extends Component {
         this.setState({ password: event.target.value });
     }
     sendData = () => {
-        var data = new FormData();
-        data.append('name', this.state.name);
-        data.append('surname', this.state.surname);
-        data.append('email', this.state.email);
-        data.append('phone_number', this.state.phone_number);
-        data.append('password', this.state.password);
-        fetch('http://localhost:8080/registration', {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-            },
-            method: 'POST',
-            body: data
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-
         fetch('http://localhost:8080/registration', {
             method: 'POST',
             headers: {
@@ -56,26 +39,10 @@ export default class Registration extends Component {
                 }
             })
         });
-
-
-
-        // (async () => {
-        //     const rawResponse = await fetch('http://localhost:8080/registration', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Accept': 'application/json, text/plain, */*',
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({ name: this.state.name, surname: this.state.surname })
-        //     });
-        //     const content = await rawResponse.json();
-
-        //     console.log(content);
-        // })();
+        localStorage.clear();
+        this.props.history.push('/login');
     }
     render() {
-        console.log(this.state);
-
         return (
             <div className="registration">
                 <h2 className="registration__title">Create account</h2>

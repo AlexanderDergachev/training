@@ -7,6 +7,8 @@ import Footer from './components/Footer';
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
 import Registration from './components/Registration';
+import Login from './components/Login';
+import CreateOrder from './components/CreateOrder';
 
 export default class App extends Component {
 
@@ -26,6 +28,8 @@ export default class App extends Component {
             <Route path='/product/:id' component={SingleProduct} />
             <Route path='/cart' component={Cart} />
             <Route path='/registration' component={Registration} />
+            <Route path='/login' component={Login} />
+            <Route path='/create-order' component={CreateOrder} />
           </Switch>
           <Footer />
         </BrowserRouter>

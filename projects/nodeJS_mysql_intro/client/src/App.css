@@ -323,7 +323,7 @@ body {
     transform: scale(1.2);
 }
 
-.registration {
+.registration, .login__container {
     margin: 0 auto;
     margin-top: 10px;
     max-width: 30%;
@@ -335,12 +335,12 @@ body {
     padding-top: 10px;
     margin-bottom: 10px;
 }
-.registration__label {
+.registration__label, .login__label {
     font-size: 30px;
     padding-left: 18px;
     padding-top: 5px;
 }
-.registration__input {
+.registration__input, .login__input {
     width: 90%;
     margin: 0 auto;
     min-height: 40px;
@@ -350,17 +350,54 @@ body {
     padding-top: 5px;
     font-size: 30px;
     padding-left: 15px;
+    color: rgb(5, 5, 56);
 
 }
-.registration__title {
+.registration__title, .login__title {
     font-size: 40px;
     padding-left: 18px;
 
 }
-.registration__button {
+.registration__button, .login__button {
     padding: 20px;
     max-width: 80%; 
     margin: 0 auto;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+.login__button {
+    width: 80%;
+    font-size: 24px;
+}
+
+.login {
+    padding-top: 5%;
+    min-height: 80vh;
+}
+
+.login__error {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 70px;
+    color: rgb(5, 5, 56);
+    text-transform: uppercase;
+}
+.logout__container {
+    min-height: 90vh;
+    text-align: center;
+    padding-top: 7%;
+}
+
+.logout__title {
+    font-size: 60px;
+    color: rgb(5, 5, 56);
+}
+
+.logout__button {
+    width: 20%;
+    height: 70px;
+    border-radius: 8px;
+    font-size: 40px;
+    margin-top: 3%;
+    color: rgb(5, 5, 56);
 }
