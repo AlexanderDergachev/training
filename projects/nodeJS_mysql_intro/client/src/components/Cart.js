@@ -30,8 +30,9 @@ export default class Cart extends Component {
                 total += product.price;
             });
         } catch (error) { }
-        this.setState({ totalPrice: total });
         localStorage.setItem('cart', JSON.stringify(filterdCart));
+        this.setState({ totalPrice: total });
+        localStorage.setItem('totalPrice', total)
     }
     render() {
         return (
@@ -53,10 +54,10 @@ export default class Cart extends Component {
                 {
                     (this.state.totalPrice === 0) ? (<h2 className="cart__total">Your cart is empty</h2>) :
                         (
-                            <div className="">
+                            <React.Fragment>
                                 <h2 className="cart__total">Total: {this.state.totalPrice} &#8372;</h2>
-                                <Link to="/create-order">Create order</Link>
-                            </div>
+                                <Link className="cart__total_checkout" to="/create-order">Checkout &#8594;</Link>
+                            </React.Fragment>
                         )
                 }
             </div>

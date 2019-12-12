@@ -323,7 +323,7 @@ body {
     transform: scale(1.2);
 }
 
-.registration, .login__container {
+.registration, .login__container, .create-order, .promocode__container {
     margin: 0 auto;
     margin-top: 10px;
     max-width: 30%;
@@ -335,12 +335,12 @@ body {
     padding-top: 10px;
     margin-bottom: 10px;
 }
-.registration__label, .login__label {
+.registration__label, .login__label, .create-order__label {
     font-size: 30px;
     padding-left: 18px;
     padding-top: 5px;
 }
-.registration__input, .login__input {
+.registration__input, .login__input, .create-order__input, .promocode__input {
     width: 90%;
     margin: 0 auto;
     min-height: 40px;
@@ -353,12 +353,12 @@ body {
     color: rgb(5, 5, 56);
 
 }
-.registration__title, .login__title {
+.registration__title, .login__title, .create-order__title, .promocode__title {
     font-size: 40px;
     padding-left: 18px;
 
 }
-.registration__button, .login__button {
+.registration__button, .login__button, .create-order__button, .promocode__button{
     padding: 20px;
     max-width: 80%; 
     margin: 0 auto;
@@ -400,4 +400,38 @@ body {
     font-size: 40px;
     margin-top: 3%;
     color: rgb(5, 5, 56);
+}
+.cart__total_checkout {
+    font-size: 40px;
+    color: rgb(5, 5, 56);
+}
+
+.create-order__button {
+    padding: 16px;
+    width: 75%;
+    font-size: 24px;
+}
+.create-order__container {
+    min-height: 90vh;
+}
+
+.promocode__container {
+    position: absolute;
+    left: 20px;
+}
+.promocode__button { 
+    width: 90%;
+}
+.promocode__price {
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    padding: 10px 0;
+}
+.promocode__incorrect {
+    text-align: center;
+}
+.create-order__wasSended {
+    text-align: center;
+    padding-top: 20%;
 }

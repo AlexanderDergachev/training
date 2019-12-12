@@ -83,29 +83,29 @@ app.post('/create-order', (req, res) => {
     const user_id = req.body.user_id;
     const total_price = req.body.totalPrice;
     const address = req.body.address;
-    
+
     let add_address = 'INSERT INTO address (street, number, district, city, country) VALUES (?, ?, ?, ?, ?)'
     pool.query(add_address, [address.street, address.number, address.district, address.city, address.country, total_price, user_id], function (err, data) {});
 
     pool.query('SELECT MAX(id) FROM address', function (err, data) {
-        let address_max = (Object.values(data[0])[0]);
-        console.log("СМОТРИ СМОТРИ АЙДИ АДРЕСА = " + address_max);        
+        let address_max = (Object.values(data[0])[0]) + 1;
+        console.log("СМОТРИ СМОТРИ АЙДИ АДРЕСА = " + address_max);
         let add_booking = 'INSERT INTO booking (total_price, user_id, address_id) VALUES (?, ?, ?)';
         pool.query(add_booking, [total_price, user_id, address_max], function (err, data) {
             if (err) {
-                console.log('ошибка в заполнении букинга')
+                console.log('something go wrong with creating booking')
             }
         });
     })
 
     pool.query('SELECT MAX(id) FROM booking', function (err, data) {
-        let booking_max = (Object.values(data[0])[0]);
+        let booking_max = (Object.values(data[0])[0] ) + 1;
         for (let i = 0; i < sorted_cart_length; i++) {
             let add_order = 'INSERT INTO orders (count, product_id, booking_id) VALUES (?, ?, ?)';
             pool.query(add_order, [sorted_cart[i].sum, sorted_cart[i].id, booking_max], function (err, data) {
                 if (err) {
-                    console.log('ошибка в заполнении ордера');
-                }                
+                    console.log('something go wrong with creating order');
+                }
                 if (i + 1 === sorted_cart_length) {
                     res.sendStatus('200')
                 }
@@ -114,6 +114,26 @@ app.post('/create-order', (req, res) => {
         console.log('created');
     })
 })
+
+
+app.post('/promocode', (req, res) => {
+    const promocode = req.body.promocode;
+    try {
+        const sql = 'SELECT discount FROM promocode WHERE value = ?';
+        let query = pool.query(sql, [promocode], (err, result) => {
+            if (result[0]) {
+                res.json({
+                    discount: result[0].discount
+                })
+            } else if (res[0] = []) {
+                res.sendStatus(403)
+            }
+        })
+    } catch (error) {
+        res.sendStatus(403)
+    }
+})
+
 
 app.post('/login', (req, res) => {
     const user = {
