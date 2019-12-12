@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
 var cors = require('cors');
 const app = express();
-
+const uuidv1 = require('uuid/v1');
+const randomInt = require('random-int');
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -28,7 +29,7 @@ const pool = mysql.createPool({
     connectionLimit: 5,
     host: "localhost",
     user: "root",
-    database: "test_shop",
+    database: "shop",
     password: ""
 });
 
@@ -77,45 +78,122 @@ app.post('/registration', function (req, res) {
     // });
 });
 
+// app.post('/create-order', (req, res) => {
+//     const sorted_cart = sortCart(req.body.cart);
+//     const sorted_cart_length = sorted_cart.length;
+//     const user_id = req.body.user_id;
+//     const total_price = req.body.totalPrice;
+//     const address = req.body.address;
+
+//     let add_address = 'INSERT INTO address (street, number, district, city, country) VALUES (?, ?, ?, ?, ?)'
+//     pool.query(add_address, [address.street, address.number, address.district, address.city, address.country, total_price, user_id], function (err, data) {});
+
+//     pool.query('SELECT MAX(id) FROM address', function (err, data) {
+//         let address_max = (Object.values(data[0])[0]);
+//         console.log("СМОТРИ СМОТРИ АЙДИ АДРЕСА = " + address_max);
+//         let add_booking = 'INSERT INTO booking (total_price, user_id, address_id) VALUES (?, ?, ?)';
+//         pool.query(add_booking, [total_price, user_id, address_max + 1 ], function (err, data) {
+//             if (err) {
+//                 console.log('something go wrong with creating booking')
+//             }
+//         });
+//     })
+
+//     pool.query('SELECT MAX(id) FROM booking', function (err, data) {
+//         let booking_max = (Object.values(data[0])[0]);
+//         console.log("СМОТРИ СМОТРИ АЙДИ БУКИНГА = " + booking_max);
+
+//         for (let i = 0; i < sorted_cart_length; i++) {
+//             let add_order = 'INSERT INTO orders (count, product_id, booking_id) VALUES (?, ?, ?)';
+//             pool.query(add_order, [sorted_cart[i].sum, sorted_cart[i].id, booking_max + 1], function (err, data) {
+//                 if (err) {
+//                     console.log('something go wrong with creating order');
+//                 }
+//                 if (i + 1 === sorted_cart_length) {
+//                     res.sendStatus('200')
+//                 }
+//             });
+//         }
+//         console.log('created');
+//     })
+// })
+
 app.post('/create-order', (req, res) => {
     const sorted_cart = sortCart(req.body.cart);
     const sorted_cart_length = sorted_cart.length;
     const user_id = req.body.user_id;
     const total_price = req.body.totalPrice;
     const address = req.body.address;
+    const address_id = randomInt(1000000, 10000000);
+    const booking_id = randomInt(1000000, 10000000);
+    const order_id = randomInt(1000000, 10000000);
+    let add_address = 'INSERT INTO address (id, street, number, district, city, country) VALUES (?, ?, ?, ?, ?, ?)'
+    pool.query(add_address, [address_id, address.street, address.number, address.district, address.city, address.country], function (err, data) {
+        if (err) console.log(err);
+    });
 
-    let add_address = 'INSERT INTO address (street, number, district, city, country) VALUES (?, ?, ?, ?, ?)'
-    pool.query(add_address, [address.street, address.number, address.district, address.city, address.country, total_price, user_id], function (err, data) {});
+    let add_booking = 'INSERT INTO booking (id, total_price, user_id, address_id) VALUES (?, ?, ?, ?)';
+    pool.query(add_booking, [booking_id, total_price, user_id, address_id], function (err, data) {
+        if (err) {
+            console.log('something go wrong with creating booking')
+        }
+    });
 
-    pool.query('SELECT MAX(id) FROM address', function (err, data) {
-        let address_max = (Object.values(data[0])[0]) + 1;
-        console.log("СМОТРИ СМОТРИ АЙДИ АДРЕСА = " + address_max);
-        let add_booking = 'INSERT INTO booking (total_price, user_id, address_id) VALUES (?, ?, ?)';
-        pool.query(add_booking, [total_price, user_id, address_max], function (err, data) {
+    for (let i = 0; i < sorted_cart_length; i++) {
+        let add_order = 'INSERT INTO orders (id, count, product_id, booking_id) VALUES (?, ?, ?, ?)';
+        console.log('ahtuuuuung = ' + booking_id);
+        
+        pool.query(add_order, [order_id+i, sorted_cart[i].sum, sorted_cart[i].id, booking_id], function (err, data) {
             if (err) {
-                console.log('something go wrong with creating booking')
+                console.log(err);
+            }
+            if (i + 1 === sorted_cart_length) {
+                res.sendStatus('200')
             }
         });
-    })
+    }
+    // pool.query('SELECT MAX(id) FROM address', function (err, data) {
+    //     let address_max = (Object.values(data[0])[0]);
+    //     console.log("СМОТРИ СМОТРИ АЙДИ АДРЕСА = " + address_max);
+    //     let add_booking = 'INSERT INTO booking (total_price, user_id, address_id) VALUES (?, ?, ?)';
+    //     pool.query(add_booki ng, [total_price, user_id, address_max + 1 ], function (err, data) {
+    //         if (err) {
+    //             console.log('something go wrong with creating booking')
+    //         }
+    //     });
+    // })
 
-    pool.query('SELECT MAX(id) FROM booking', function (err, data) {
-        let booking_max = (Object.values(data[0])[0] ) + 1;
-        for (let i = 0; i < sorted_cart_length; i++) {
-            let add_order = 'INSERT INTO orders (count, product_id, booking_id) VALUES (?, ?, ?)';
-            pool.query(add_order, [sorted_cart[i].sum, sorted_cart[i].id, booking_max], function (err, data) {
-                if (err) {
-                    console.log('something go wrong with creating order');
-                }
-                if (i + 1 === sorted_cart_length) {
-                    res.sendStatus('200')
-                }
-            });
+    // pool.query('SELECT MAX(id) FROM booking', function (err, data) {
+    //     let booking_max = (Object.values(data[0])[0]);
+    //     console.log("СМОТРИ СМОТРИ АЙДИ БУКИНГА = " + booking_max);
+
+    //     for (let i = 0; i < sorted_cart_length; i++) {
+    //         let add_order = 'INSERT INTO orders (count, product_id, booking_id) VALUES (?, ?, ?)';
+    //         pool.query(add_order, [sorted_cart[i].sum, sorted_cart[i].id, booking_max + 1], function (err, data) {
+    //             if (err) {
+    //                 console.log('something go wrong with creating order');
+    //             }
+    //             if (i + 1 === sorted_cart_length) {
+    //                 res.sendStatus('200')
+    //             }
+    //         });
+    //     }
+    //     console.log('created');
+    // })
+})
+// -------------------------------------------------------------
+
+app.get('/check-auth', verifyToken, (req, res) => {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            res.sendStatus(200)
         }
-        console.log('created');
     })
 })
 
-
+// -----------------------------------------------------------------------------
 app.post('/promocode', (req, res) => {
     const promocode = req.body.promocode;
     try {
@@ -140,7 +218,7 @@ app.post('/login', (req, res) => {
         email: req.body.user.email.toLowerCase(),
         password: req.body.user.password
     }
-    const sql = 'SELECT email, password, name, surname, id FROM user WHERE email = ? AND password = ?';
+    const sql = 'SELECT email, password, name, surname, id, isAdmin FROM user WHERE email = ? AND password = ?';
     let query = pool.query(sql, [user.email, user.password], (err, result) => {
         try {
             if (result[0].email === user.email && result[0].password === user.password) {
@@ -153,7 +231,8 @@ app.post('/login', (req, res) => {
                             name: result[0].name,
                             surname: result[0].surname,
                             email: result[0].email,
-                            id: result[0].id
+                            id: result[0].id,
+                            isAdmin: result[0].isAdmin
                         }
                     })
                 })
@@ -173,19 +252,19 @@ app.get('/promo', (req, res) => {
     })
 })
 
-app.get('/product', verifyToken, (req, res) => {
+app.get('/product', (req, res) => {
 
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (err) {
-            res.sendStatus(403);
-        } else {
-            let sql = 'SELECT * FROM product';
-            let query = pool.query(sql, (err, result) => {
-                if (err) throw err;
-                res.json(result);
-            })
-        }
+    // jwt.verify(req.token, 'secretkey', (err, authData) => {
+    //     if (err) {
+    //         res.sendStatus(403);
+    //     } else {
+    let sql = 'SELECT * FROM product';
+    let query = pool.query(sql, (err, result) => {
+        if (err) throw err;
+        res.json(result);
     })
+    //         }
+    //     })
 })
 
 app.get('/product/:id', (req, res) => {
@@ -197,7 +276,15 @@ app.get('/product/:id', (req, res) => {
     })
 })
 
+app.get('/admin', (req, res) => {
+    let sql = 'SELECT o.id as order_id, o.count, p.id as product_id, b.total_price, a.street, a.number, a.district, a.city, a.country, u.name, u.phone_number FROM orders o, booking b, product p, address a, user u WHERE o.product_id = p.id AND o.booking_id = b.id AND b.address_id = a.id AND b.user_id = u.id';
+    // let sql = 'SELECT o.id, p.id FROM orders o, product p WHERE o.product_id = p.id';
 
+    let query = pool.query(sql, (err, result) => {
+        if (err) console.log(err);
+        res.send(JSON.stringify(result));
+    })
+})
 
 app.listen(8080, function () {
     console.log("connected");

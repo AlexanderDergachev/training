@@ -38,9 +38,14 @@ export default class Login extends Component {
             })
         })
             .then(responce => responce.json())
-            .then(data => {
+            .then(data => {                
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('user_data', JSON.stringify(data.user));
+                const user = {
+                    name: data.user.name,
+                    id: data.user.id,
+                    isAdmin: data.user.isAdmin
+                }
+                localStorage.setItem('user_data', JSON.stringify(user));
                 this.props.history.push('/');
             })
             .catch(error => {

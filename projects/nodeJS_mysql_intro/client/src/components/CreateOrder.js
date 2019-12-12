@@ -32,6 +32,24 @@ export default class CreateOrder extends Component {
         this.setState({ promocode: event.target.value });
     }
     componentDidMount() {
+        let token = localStorage.getItem('token');
+        let data = `Bearer ${token}`;
+        fetch('http://localhost:8080/check-auth', {
+            headers: {
+                Authorization: data
+            }
+        })
+            .then(responce => {
+                if (responce.ok) {} else {
+                    this.props.history.push('/login');
+                }
+            })
+            .catch(error => {
+                console.log('hui');
+                
+                this.props.history.push('/login');
+            })
+
         const cart = JSON.parse(localStorage.getItem("cart"));
         const totalPrice = JSON.parse(localStorage.getItem("totalPrice"))
         this.setState({
@@ -63,6 +81,7 @@ export default class CreateOrder extends Component {
             })
     }
     sendData = () => {
+
         const user_data = localStorage.getItem('user_data');
         const user_id = JSON.parse(user_data).id;
         fetch('http://localhost:8080/create-order', {
@@ -84,7 +103,7 @@ export default class CreateOrder extends Component {
             })
         });
         this.setState({ wasSended: true });
-        // this.props.history.push('')
+        localStorage.setItem('cart', JSON.stringify([]));
     }
     render() {
         return (

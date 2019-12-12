@@ -6,18 +6,11 @@ export default class Products extends Component {
         isLoading: true
     }
     componentDidMount() {
-        let token = localStorage.getItem('token');
-        let data = `Bearer ${token}`;
-        fetch('http://localhost:8080/product', {
-            headers: {
-                Authorization: data
-            }
-        })
+
+        fetch('http://localhost:8080/product')
             .then(responce => responce.json())
             .then(data => this.setState({ products: data }))
-            .catch(error => {
-                this.props.history.push('/login');
-            })
+
         this.setState({ isLoading: false })
     }
     render() {

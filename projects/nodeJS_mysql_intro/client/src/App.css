@@ -435,3 +435,17 @@ body {
     text-align: center;
     padding-top: 20%;
 }
+
+.admin {
+    min-height: 90vh;
+}
+
+.admin__order {
+    display: inline-flex;
+}
+.admin__container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    margin-left: 20px;
+}

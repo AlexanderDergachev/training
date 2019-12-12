@@ -9,8 +9,13 @@ export default class Cart extends Component {
         totalPrice: null
     }
     componentDidMount() {
-        let cart = JSON.parse(localStorage.getItem('cart'));
         // let sortedCart = sortCart(cart);
+        let cart;
+        try {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        } catch (error) {
+            localStorage.setItem('cart', JSON.stringify([]));  
+        }
         this.setState({ cart: cart });
         let total = 0;
         try {

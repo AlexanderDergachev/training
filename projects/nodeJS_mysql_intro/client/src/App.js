@@ -9,6 +9,7 @@ import Cart from './components/Cart';
 import Registration from './components/Registration';
 import Login from './components/Login';
 import CreateOrder from './components/CreateOrder';
+import Admin from './components/Admin';
 
 export default class App extends Component {
 
@@ -30,6 +31,7 @@ export default class App extends Component {
             <Route path='/registration' component={Registration} />
             <Route path='/login' component={Login} />
             <Route path='/create-order' component={CreateOrder} />
+            <Route path='/admin' component={Admin} />
           </Switch>
           <Footer />
         </BrowserRouter>
