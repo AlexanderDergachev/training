@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './App.css';
 import BoardList from './components/BoardList/BoardList'
-
 import { connect } from 'react-redux';
 import { createBoard } from './actions/actionCreator';
 
@@ -14,14 +13,18 @@ class App extends Component {
     this.setState({
       newBoardName: e.target.value
     })
-
+    
   }
 
-  addBoard = (value) => {
-    const { createBoard } = this.props;
-    createBoard(this.state.newBoardName);
-    console.log('addBoard в App.js сработал');
+  addBoard = () => {
+    const { createBoard, boards } = this.props;
+    const { newBoardName } = this.state;
+    const id = (new Date()).getTime();
+    createBoard(id, newBoardName);
+    localStorage.setItem('boards', JSON.stringify([...boards, {id: id, name: newBoardName}]));
+    this.setState({newBoardName: ''});
   }
+
   render() {
     return (
       <div>

@@ -1,11 +1,12 @@
-import { CREATE_BOARD } from '../constants';
+import { CREATE_BOARD, INITIAL_BOARDS } from '../constants';
 
-const boards = (state = [], action) => {
-    switch (action.type) {
+const boards = (state = INITIAL_BOARDS, { id, name, type }) => {
+    switch (type) {
         case CREATE_BOARD :
             return [
                 ...state, {
-                    name: action.name,
+                    id: id,
+                    name: name,
                 }
             ];
         default:
