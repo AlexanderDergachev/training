@@ -6,17 +6,21 @@ import '../Board/Board.css';
 import { connect } from 'react-redux';
 
 function BoardList(props) {
-    const { onChangeCreateBoardInput, boards, addBoard } = props;
+    const { onChangeCreateBoardInput, boards, createBoard, removeBoard } = props;
     return (
         <div className='board-list'>
             <BoardCreator
                 onChangeCreateBoardInput={onChangeCreateBoardInput}
-                addBoard={addBoard}
+                createBoard={createBoard}
             />
             {
                 boards && boards.map(board => {
-                    return ( 
-                        <Board key={board.id} name={board.name}></Board>
+                    return (
+                        <Board
+                            removeBoard={removeBoard}
+                            id={board.id} key={board.id}
+                            name={board.name}>
+                        </Board>
                     )
                 })
             }

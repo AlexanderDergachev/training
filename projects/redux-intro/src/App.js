@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
-import { createBoard } from './actions/actionCreator';
+import { createBoard, removeBoard } from './actions/actionCreator';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -13,25 +14,28 @@ class App extends Component {
     this.setState({
       newBoardName: e.target.value
     })
-    
   }
 
-  addBoard = () => {
-    const { createBoard, boards } = this.props;
+  createBoard = () => {
+    const { createBoard } = this.props;
     const { newBoardName } = this.state;
-    const id = (new Date()).getTime();
-    createBoard(id, newBoardName);
-    localStorage.setItem('boards', JSON.stringify([...boards, {id: id, name: newBoardName}]));
-    this.setState({newBoardName: ''});
+    createBoard((new Date()).getTime(), newBoardName);
+    this.setState({ newBoardName: '' });
   }
 
   render() {
+    const { removeBoard } = this.props
     return (
       <div>
-        <BoardList
-          onChangeCreateBoardInput={this.onChangeCreateBoardInput}
-          addBoard={this.addBoard}
-        />
+        <BrowserRouter>
+          <Switch>
+            <Route path='/' render={() => (<BoardList
+              onChangeCreateBoardInput={this.onChangeCreateBoardInput}
+              createBoard={this.createBoard}
+              removeBoard={removeBoard}
+            />)} />
+          </Switch>
+        </BrowserRouter>
       </div>
     )
   }
@@ -39,4 +43,4 @@ class App extends Component {
 
 export default connect(state => ({
   boards: state.boards,
-}), { createBoard })(App);
+}), { createBoard, removeBoard })(App);

@@ -11,16 +11,17 @@ export default class BoardCreator extends Component {
         this.setState(prevState => ({
             isOpen: !prevState.isOpen
         }));
+
     }
-    addBoard = () => {
-        const { addBoard } = this.props;
-        addBoard();
+    createBoard = () => {
+        const { createBoard } = this.props;
+        createBoard();
         this.inputRef.current.value = '';
         this.inputRef.current.focus();
     }
     handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            this.addBoard();
+            this.createBoard();
         }
     }
     render() {
@@ -38,7 +39,7 @@ export default class BoardCreator extends Component {
                     <input onKeyPress={this.handleKeyPress} ref={this.inputRef} onChange={onChangeCreateBoardInput} className="board-creator__input" type="text" />
                     <div className="board-creator__button-container">
                         <button onClick={this.handleBoardCreator} className="board-creator__close">cansel</button>
-                        <button onClick={this.addBoard} className="board-creator__create">create</button>
+                        <button onClick={this.createBoard} className="board-creator__create">create</button>
                     </div>
                 </div>
             );
