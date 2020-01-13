@@ -3,7 +3,6 @@ import BoardCreator from '../BoardCreator/BoardCreator';
 import './BoardList.css';
 import Board from '../Board/Board';
 import '../Board/Board.css';
-import { connect } from 'react-redux';
 
 function BoardList(props) {
     const { onChangeCreateBoardInput, boards, createBoard, removeBoard } = props;
@@ -28,6 +27,4 @@ function BoardList(props) {
     )
 }
 
-export default connect(state => ({
-    boards: state.boards,
-}))(BoardList);
+export default BoardList;

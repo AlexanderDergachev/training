@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
-import { createBoard, removeBoard } from './actions/actionCreator';
+import { createBoard, removeBoard } from './store/actions/actionCreator';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   render() {
-    const { removeBoard } = this.props
+    const { removeBoard, boards } = this.props
     return (
       <div>
         <BrowserRouter>
@@ -33,6 +33,7 @@ class App extends Component {
               onChangeCreateBoardInput={this.onChangeCreateBoardInput}
               createBoard={this.createBoard}
               removeBoard={removeBoard}
+              boards={boards}
             />)} />
           </Switch>
         </BrowserRouter>
