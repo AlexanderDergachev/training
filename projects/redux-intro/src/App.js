@@ -2,17 +2,25 @@ import React, { Component } from 'react'
 import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
-import { createBoard, removeBoard } from './store/actions/actionCreator';
+import { createBoard, removeBoard, createTaskList } from './store/actions/boardActionCreator';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import TaskLists from './components/TasksLists/TaskLists';
 
 class App extends Component {
   state = {
     newBoardName: '',
+    newTaskListName: '',
   }
 
   onChangeCreateBoardInput = e => {
     this.setState({
       newBoardName: e.target.value
+    })
+  }
+
+  onChangeCreateTaskListInput = e => {
+    this.setState({
+      newTaskListName: e.target.value
     })
   }
 
@@ -23,17 +31,30 @@ class App extends Component {
     this.setState({ newBoardName: '' });
   }
 
+  createTaskList = (board_id) => {
+    const { createTaskList } = this.props;
+    const { newTaskListName } = this.state;
+    createTaskList(board_id, (new Date().getTime()), newTaskListName);
+    this.setState({newTaskListName: '' })
+  }
   render() {
-    const { removeBoard, boards } = this.props
+    const { removeBoard, boards, getBoardById } = this.props
     return (
       <div>
         <BrowserRouter>
           <Switch>
-            <Route path='/' render={() => (<BoardList
+            <Route exact path='/' render={() => (<BoardList
               onChangeCreateBoardInput={this.onChangeCreateBoardInput}
               createBoard={this.createBoard}
               removeBoard={removeBoard}
               boards={boards}
+            />)} />
+            <Route path='/:id' render={((matchProps) => <TaskLists
+              {...matchProps}
+              onChangeCreateTaskListInput={this.onChangeCreateTaskListInput}
+              boards={boards}
+              getBoardById={getBoardById}
+              createTaskList={this.createTaskList}
             />)} />
           </Switch>
         </BrowserRouter>
@@ -44,4 +65,4 @@ class App extends Component {
 
 export default connect(state => ({
   boards: state.boards,
-}), { createBoard, removeBoard })(App);
+}), { createBoard, removeBoard, createTaskList })(App);

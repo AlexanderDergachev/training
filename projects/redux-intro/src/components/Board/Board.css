@@ -1,4 +1,4 @@
-.board{
+.board {
     width: 28%;
     background-color: rgb(172, 232, 255);
     border-radius: 8px;
@@ -11,11 +11,11 @@
     cursor: pointer;
     padding: 15px 0;
     padding-top: 15px;
-    box-shadow: 0px 6px 10px 4px rgba(0,0,0,0.28);
+    box-shadow: 0px 6px 10px 4px rgba(0, 0, 0, 0.28);
     margin-top: 30px;
-    overflow-x:hidden;
+    overflow-x: hidden;
     align-self: flex-start;
-    
+
 }
 
 .board:hover {
@@ -41,4 +41,14 @@
 
 .hidden {
     visibility: hidden;
+}
+
+.board__link:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 }

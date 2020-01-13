@@ -14,7 +14,7 @@ class Board extends React.Component {
         const { name, id, removeBoard } = this.props
         return (
             <div className='board' onMouseEnter={this.switchHover} onMouseLeave={this.switchHover}>
-                <Link to={`/${id}`}>{name}</Link>
+                <Link className='board__link' to={`/${id}`}>{name}</Link>
                 <span
                     onClick={() => removeBoard(id)}
                     className={this.state.hover ? 'board__icon visible' : 'board__icon hidden'}>
