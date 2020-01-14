@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
-import { createBoard, removeBoard, createTaskList } from './store/actions/boardActionCreator';
+import { createBoard, removeBoard, createTaskList, removeTaskList } from './store/actions/boardActionCreator';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TaskLists from './components/TasksLists/TaskLists';
 
@@ -38,7 +38,7 @@ class App extends Component {
     this.setState({newTaskListName: '' })
   }
   render() {
-    const { removeBoard, boards, getBoardById } = this.props
+    const { removeBoard, boards, getBoardById, removeTaskList } = this.props
     return (
       <div>
         <BrowserRouter>
@@ -55,6 +55,7 @@ class App extends Component {
               boards={boards}
               getBoardById={getBoardById}
               createTaskList={this.createTaskList}
+              removeTaskList={removeTaskList}
             />)} />
           </Switch>
         </BrowserRouter>
@@ -65,4 +66,4 @@ class App extends Component {
 
 export default connect(state => ({
   boards: state.boards,
-}), { createBoard, removeBoard, createTaskList })(App);
+}), { createBoard, removeBoard, createTaskList, removeTaskList})(App);

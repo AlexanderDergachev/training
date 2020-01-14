@@ -1,22 +1,40 @@
 import React, { Component } from 'react'
 import TaskListCreator from '../TaskListCreator/TaskListCreator'
 import './TaskLists.css';
+import {Link} from 'react-router-dom'
+import SingleTaskList from '../SingleTaskList/SingleTaskList';
 
 export default class TaskLists extends Component {
     render() {
         const boardId = this.props.match.params.id;
-        const { boards, onChangeCreateTaskListInput, createTaskList } = this.props;
+        const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         return (
             <React.Fragment>
-                <h1 className="tasklists__title">{board.name}</h1>
+                <div className="tasklists__title-container">
+                    <Link to='/' className="tasklists__title">{board.name}</Link>
+                </div>
                 <div className='tasklists'>
                     <TaskListCreator
                         onChangeCreateTaskListInput={onChangeCreateTaskListInput}
                         createTaskList={createTaskList}
                         id={boardId}
                     />
+                    {
+                        board.tasklists && board.tasklists.map(tasklist => {
+                            return (
+                                <SingleTaskList 
+                                    boardId={boardId}
+                                    key={tasklist.id} 
+                                    name={tasklist.name}
+                                    id={tasklist.id}
+                                    removeTaskList={removeTaskList}
+                                />
+                            )
+                        })
+                    }
                 </div>
+
             </React.Fragment>
         )
     }
