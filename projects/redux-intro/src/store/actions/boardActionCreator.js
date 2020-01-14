@@ -11,11 +11,12 @@ export const removeBoard = ( id ) => ({
     id
 })
 
-export const createTaskList = (board_id, id, name) => ({
+export const createTaskList = (board_id, id, name, editedTaskListIndex) => ({
     type: CREATE_TASKLIST,
     board_id,
     id,
-    name
+    name,
+    editedTaskListIndex
 });
 
 export const removeTaskList = (board_id, id) => ({

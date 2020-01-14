@@ -9,7 +9,7 @@ export default class SingleTaskList extends Component {
         this.setState({ hover: !this.state.hover })
     }
     render() {
-        const { name, id, removeTaskList, boardId } = this.props;
+        const { name, id, removeTaskList, boardId, editTaskList } = this.props;
         return (
             <div
                 onMouseEnter={this.switchHover}
@@ -17,10 +17,17 @@ export default class SingleTaskList extends Component {
                 className='single-tasklist'>
                 <h1 className='single-tasklist__title'>{name}</h1>
                 <span
-                    onClick={() => { if (window.confirm('This list will be deleted')) removeTaskList(boardId, id)}}
-                    className={this.state.hover ? 'single-tasklist__remove-icon visible' : 
-                    'single-tasklist__remove-icon hidden'}>
+                    onClick={() => { if (window.confirm('This list will be deleted')) removeTaskList(boardId, id) }}
+                    className={this.state.hover ? 'single-tasklist__remove-icon visible' :
+                        'single-tasklist__remove-icon hidden'}>
                     &#x2715;
+                </span>
+                <span
+                onClick={() => {editTaskList(id, name, boardId)}}
+                    className={this.state.hover ? 'single-tasklist__edit-icon visible' :
+                        'single-tasklist__edit-icon hidden'}
+                >
+                    &#9998;
                 </span>
             </div>
         )

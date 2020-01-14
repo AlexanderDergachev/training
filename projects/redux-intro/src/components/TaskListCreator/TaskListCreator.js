@@ -8,12 +8,11 @@ export default class TaskListCreator extends Component {
         const { createTaskList, id } = this.props;
         if (e.key === 'Enter') {
             createTaskList(id);
-            this.inputRef.current.value = '';
             this.inputRef.current.focus();
         }
     }
     render() {
-        const { onChangeCreateTaskListInput } = this.props;
+        const { onChangeCreateTaskListInput, newTaskListName } = this.props;
         return (
             <div className='tasklist-creator'>
                 <input
@@ -23,6 +22,7 @@ export default class TaskListCreator extends Component {
                     onChange={onChangeCreateTaskListInput}
                     onKeyPress={this.handleKeyPress}
                     ref={this.inputRef}
+                    value={newTaskListName}
                 />
             </div>
         )

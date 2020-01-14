@@ -5,12 +5,13 @@ import Board from '../Board/Board';
 import '../Board/Board.css';
 
 function BoardList(props) {
-    const { onChangeCreateBoardInput, boards, createBoard, removeBoard } = props;
+    const { onChangeCreateBoardInput, boards, createBoard, removeBoard, newBoardName } = props;
     return (
         <div className='board-list'>
             <BoardCreator
                 onChangeCreateBoardInput={onChangeCreateBoardInput}
                 createBoard={createBoard}
+                newBoardName={newBoardName}
             />
             {
                 boards && boards.map(board => {

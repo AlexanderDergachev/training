@@ -10,6 +10,7 @@ class App extends Component {
   state = {
     newBoardName: '',
     newTaskListName: '',
+    editedTaskListIndex: 0
   }
 
   onChangeCreateBoardInput = e => {
@@ -24,6 +25,7 @@ class App extends Component {
     })
   }
 
+
   createBoard = () => {
     const { createBoard } = this.props;
     const { newBoardName } = this.state;
@@ -33,9 +35,23 @@ class App extends Component {
 
   createTaskList = (board_id) => {
     const { createTaskList } = this.props;
-    const { newTaskListName } = this.state;
-    createTaskList(board_id, (new Date().getTime()), newTaskListName);
-    this.setState({newTaskListName: '' })
+    const { newTaskListName, editedTaskListIndex } = this.state;
+    createTaskList(board_id, (new Date().getTime()), newTaskListName, editedTaskListIndex);
+    this.setState({ newTaskListName: '' })
+    this.setState({editedTaskListIndex: 0})
+  }
+  editTaskList = (id, name, board_id) => {
+    this.setState({ newTaskListName: name })
+    const { boards, removeTaskList } = this.props;
+    boards.forEach(board => {
+      board.tasklists.forEach(tasklist => {
+        if (tasklist.id === id) {
+          this.setState({editedTaskListIndex: board.tasklists.indexOf(tasklist)});
+          removeTaskList(board_id, id);
+        }
+      })
+
+    })
   }
   render() {
     const { removeBoard, boards, getBoardById, removeTaskList } = this.props
@@ -48,6 +64,7 @@ class App extends Component {
               createBoard={this.createBoard}
               removeBoard={removeBoard}
               boards={boards}
+              newBoardName={this.state.newBoardName}
             />)} />
             <Route path='/:id' render={((matchProps) => <TaskLists
               {...matchProps}
@@ -56,6 +73,8 @@ class App extends Component {
               getBoardById={getBoardById}
               createTaskList={this.createTaskList}
               removeTaskList={removeTaskList}
+              editTaskList={this.editTaskList}
+              newTaskListName={this.state.newTaskListName}
             />)} />
           </Switch>
         </BrowserRouter>
