@@ -1,4 +1,4 @@
-import { CREATE_BOARD, REMOVE_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST} from '../constants';
+import { CREATE_BOARD, REMOVE_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST, EDIT_TASKLIST } from '../constants';
 import { load } from 'redux-localstorage-simple';
 
 let BOARDS = load({ namespace: 'redux-intro' });
@@ -9,7 +9,7 @@ if (!BOARDS || !BOARDS.boards || !BOARDS.boards.length) {
     }
 }
 
-const boards = (state = BOARDS.boards, { id, name, type, board_id, editedTaskListIndex }) => {
+const boards = (state = BOARDS.boards, { id, name, type, board_id }) => {
     switch (type) {
         case CREATE_BOARD:
             return [
@@ -31,10 +31,7 @@ const boards = (state = BOARDS.boards, { id, name, type, board_id, editedTaskLis
             }
             return [...state].map(board => {
                 if (board.id === +board_id) {
-                    let firstArrayPart = board.tasklists.slice(0, editedTaskListIndex);
-                    let secondArrayPart = board.tasklists.slice(editedTaskListIndex);
-                    let updatedItems = firstArrayPart.concat([newTaskList], secondArrayPart);
-                    board.tasklists = updatedItems;
+                    board.tasklists = [newTaskList,...board.tasklists];
                 }
                 return board;
             })
@@ -44,9 +41,20 @@ const boards = (state = BOARDS.boards, { id, name, type, board_id, editedTaskLis
                     board.tasklists = board.tasklists.filter(tasklist =>
                         tasklist.id !== id
                     );
-                    return { id: board.id, name: board.name, tasklists: board.tasklists }
                 }
-                return board;
+                return { id: board.id, name: board.name, tasklists: board.tasklists }
+
+            })            
+        case EDIT_TASKLIST:
+            return  [...state].map(board => {
+                if (board.id === +board_id) {
+                    board.tasklists.forEach(tasklist => {
+                        if (tasklist.id === id) {
+                            tasklist.name = name;
+                        }
+                    })
+                }
+                return {id: board.id, name: board.name, tasklists: board.tasklists}
             })
         default:
             return state;

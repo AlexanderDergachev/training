@@ -7,7 +7,7 @@ import SingleTaskList from '../SingleTaskList/SingleTaskList';
 export default class TaskLists extends Component {
     render() {
         const boardId = this.props.match.params.id;
-        const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName, editTaskList } = this.props;
+        const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName, editTaskList, onChangeEditedTaskListName, editedTaskListName } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         return (
             <React.Fragment>
@@ -31,6 +31,8 @@ export default class TaskLists extends Component {
                                     id={tasklist.id}
                                     removeTaskList={removeTaskList}
                                     editTaskList={editTaskList}
+                                    onChangeEditedTaskListName={onChangeEditedTaskListName}
+                                    editedTaskListName={editedTaskListName}
                                 />
                             )
                         })
