@@ -48,26 +48,27 @@ export default class SingleTaskList extends Component {
                     >
                         &#9998;
                     </span>
-                </div>
-                {
-                    this.state.isEdited && (
-                        <div className="single-tasklist__edit">
-                            <input onKeyPress={this.handleKeyPress}
-                                value={editedTaskListName}
-                                onChange={onChangeEditedTaskListName}
-                                placeholder="Enter new name"
-                                className="single-tasklist__edit-input" type="text" />
-                            <div className="single-tasklist__edit-button-container">
-                                <button
-                                    onClick={this.switchIsEdited}
-                                    className="single-tasklist__edit-close">Close</button>
-                                <button
-                                    onClick={this.confirmEdit}
-                                    className="single-tasklist__edit-rename">Rename</button>
+                    {
+                        this.state.isEdited && (
+                            <div className="single-tasklist__edit">
+                                <input onKeyPress={this.handleKeyPress}
+                                    value={editedTaskListName}
+                                    onChange={onChangeEditedTaskListName}
+                                    placeholder="Enter new name"
+                                    className="single-tasklist__edit-input" type="text" />
+                                <div className="single-tasklist__edit-button-container">
+                                    <button
+                                        onClick={this.switchIsEdited}
+                                        className="single-tasklist__edit-close">Close</button>
+                                    <button
+                                        onClick={this.confirmEdit}
+                                        className="single-tasklist__edit-rename">Rename</button>
+                                </div>
                             </div>
-                        </div>
-                    )
-                }
+                        )
+                    }
+                </div>
+
             </React.Fragment>
         )
     }

@@ -3,9 +3,7 @@
     height: 100px;
     background: white;
     border: 1px solid lightgrey;
-    position: fixed;
-    left: 36%;
-    top: 15%;
+    margin: 0 auto;
     border-radius: 4px;
 }
 
