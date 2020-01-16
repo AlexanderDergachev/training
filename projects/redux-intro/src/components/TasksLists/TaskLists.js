@@ -6,11 +6,14 @@ import SingleTaskList from '../SingleTaskList/SingleTaskList';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick";
+import EditPanel from '../EditPanel/EditPanel';
 
 export default class TaskLists extends Component {
     render() {
         const boardId = this.props.match.params.id;
-        const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName, editTaskList, onChangeEditedTaskListName, editedTaskListName } = this.props;
+        const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName, 
+                editTaskList, onChangeEditedTaskListName, editedTaskListName, isEdited, switchIsEdited, 
+                onChangeEditedBoardId, onChangeEditedTaskListId } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         const settings = {
             dots: true,
@@ -41,15 +44,22 @@ export default class TaskLists extends Component {
                                         name={tasklist.name}
                                         id={tasklist.id}
                                         removeTaskList={removeTaskList}
-                                        editTaskList={editTaskList}
-                                        onChangeEditedTaskListName={onChangeEditedTaskListName}
-                                        editedTaskListName={editedTaskListName}
+                                        switchIsEdited={switchIsEdited}
+                                        onChangeEditedBoardId={onChangeEditedBoardId}
+                                        onChangeEditedTaskListId={onChangeEditedTaskListId}
                                     />
                                 )
                             })
                         }
                     </Slider>
                 </div>
+                <EditPanel 
+                    isEdited={isEdited}
+                    switchIsEdited={switchIsEdited}
+                    editedTaskListName={editedTaskListName}
+                    onChangeEditedTaskListName={onChangeEditedTaskListName}
+                    editTaskList={editTaskList}
+                />
             </React.Fragment>
         )
     }

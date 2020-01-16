@@ -11,6 +11,9 @@ class App extends Component {
     newBoardName: '',
     newTaskListName: '',
     editedTaskListName: '',
+    editedTaskListId: '',
+    editedBoardId: '',
+    isEdited: false
   }
 
   onChangeCreateBoardInput = e => {
@@ -29,6 +32,13 @@ class App extends Component {
       editedTaskListName: e.target.value
     })
   }
+  onChangeEditedTaskListId = value => {
+    this.setState({editedTaskListId: value});
+  }
+
+  onChangeEditedBoardId = value => {
+    this.setState({editedBoardId: value});
+  }
 
   createBoard = () => {
     const { createBoard } = this.props;
@@ -45,15 +55,20 @@ class App extends Component {
     this.setState({editedTaskListIndex: 0})
   }
 
-  editTaskList = (id,  board_id) => {
+  editTaskList = () => {
     this.setState({ newTaskListName: '' })
     const { editTaskList } = this.props;
-    editTaskList(board_id, id, this.state.editedTaskListName);
-    this.setState({editedTaskListName: ''})
+    const {editedBoardId, editedTaskListId, editedTaskListName} = this.state;
+    editTaskList(editedBoardId, editedTaskListId, editedTaskListName);
+    this.setState({editedTaskListName: ''});
+  }
+  switchIsEdited = () => {
+    this.setState({ isEdited: !this.state.isEdited });
   }
 
   render() {
-    const { removeBoard, boards, getBoardById, removeTaskList } = this.props
+    const { removeBoard, boards, getBoardById, removeTaskList } = this.props;
+    const {editedTaskListName, isEdited, newTaskListName } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -74,8 +89,12 @@ class App extends Component {
               createTaskList={this.createTaskList}
               removeTaskList={removeTaskList}
               editTaskList={this.editTaskList}
-              newTaskListName={this.state.newTaskListName}
-              editedTaskListName={this.state.editedTaskListName}
+              newTaskListName={newTaskListName}
+              editedTaskListName={editedTaskListName}
+              isEdited={isEdited}
+              switchIsEdited={this.switchIsEdited}
+              onChangeEditedTaskListId={this.onChangeEditedTaskListId}
+              onChangeEditedBoardId={this.onChangeEditedBoardId}
             />)} />
           </Switch>
         </BrowserRouter>

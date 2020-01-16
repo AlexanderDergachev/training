@@ -1,0 +1,54 @@
+.edit-panel {
+    position: absolute;
+    width: 700px;
+    height: 150px;
+    top: 20%;
+    margin: 15px auto;
+    /* top: 0px;  */
+    left: 0; 
+    /* bottom: 0; */
+    right: 0;
+
+    
+    z-index: 1;
+    background-color: rgb(87, 173, 207);
+    opacity: 0.92;
+    border-radius: 8px;
+}
+
+.edit-panel__input {
+    width: 92%;
+    min-height: 50px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding-left: 15px;
+    font-size: 25px;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.edit-panel__button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 3%;
+}
+
+.edit-panel__close, .edit-panel__rename{
+    color: #fff;
+    font-size: 30px;
+    border-radius: 6px;
+    width: 25%;
+
+}
+
+.tasklists__edit-rename {
+    border: 2px solid #fff;
+    transition: transform 0.1s;
+    color: rgb(119, 119, 119);
+    background-color: #fff;
+
+}
+
+.tasklists__edit-rename:hover {
+    transform: scale(1.1);
+}
