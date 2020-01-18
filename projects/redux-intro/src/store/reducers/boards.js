@@ -1,4 +1,4 @@
-import { CREATE_BOARD, REMOVE_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST, EDIT_TASKLIST } from '../constants';
+import { CREATE_BOARD, REMOVE_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST, EDIT_TASKLIST, CREATE_TASK, REMOVE_TASK } from '../constants';
 import { load } from 'redux-localstorage-simple';
 
 let BOARDS = load({ namespace: 'redux-intro' });
@@ -9,7 +9,7 @@ if (!BOARDS || !BOARDS.boards || !BOARDS.boards.length) {
     }
 }
 
-const boards = (state = BOARDS.boards, { id, name, type, board_id }) => {
+const boards = (state = BOARDS.boards, { id, name, type, board_id, tasklist_id, isСompleted }) => {
     switch (type) {
         case CREATE_BOARD:
             return [
@@ -25,13 +25,13 @@ const boards = (state = BOARDS.boards, { id, name, type, board_id }) => {
             );
         case CREATE_TASKLIST:
             const newTaskList = {
-                id: id,
-                name: name,
+                id,
+                name,
                 tasks: []
             }
             return [...state].map(board => {
                 if (board.id === +board_id) {
-                    board.tasklists = [newTaskList,...board.tasklists];
+                    board.tasklists = [newTaskList, ...board.tasklists];
                 }
                 return board;
             })
@@ -43,10 +43,9 @@ const boards = (state = BOARDS.boards, { id, name, type, board_id }) => {
                     );
                 }
                 return { id: board.id, name: board.name, tasklists: board.tasklists }
-
-            })            
+            })
         case EDIT_TASKLIST:
-            return  [...state].map(board => {
+            return [...state].map(board => {
                 if (board.id === +board_id) {
                     board.tasklists.forEach(tasklist => {
                         if (tasklist.id === id) {
@@ -54,7 +53,36 @@ const boards = (state = BOARDS.boards, { id, name, type, board_id }) => {
                         }
                     })
                 }
-                return {id: board.id, name: board.name, tasklists: board.tasklists}
+                return { id: board.id, name: board.name, tasklists: board.tasklists }
+            })
+        case CREATE_TASK:
+            const newTask = {
+                id,
+                name,
+                isСompleted
+            }
+            return [...state].map(board => {
+                if (board.id === +board_id) {
+                    board.tasklists.forEach(tasklist => {
+                        if (tasklist.id === +tasklist_id) {
+                            tasklist.tasks = [...tasklist.tasks, newTask];
+                        }
+                    })
+                }
+                return board;
+            })
+        case REMOVE_TASK:
+            return [...state].map(board => {
+                if (board.id === +board_id) {
+                    board.tasklists.forEach(tasklist => {
+                        if (tasklist.id === +tasklist_id) {
+                            tasklist.tasks = tasklist.tasks.filter(task =>
+                                task.id !== id    
+                            )
+                        }
+                    })
+                }
+                return { id: board.id, name: board.name, tasklists: board.tasklists }
             })
         default:
             return state;

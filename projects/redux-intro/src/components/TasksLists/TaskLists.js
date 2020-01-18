@@ -7,21 +7,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick";
 import EditPanel from '../EditPanel/EditPanel';
+import {settings} from '../../carousel_settings.js'
+
 
 export default class TaskLists extends Component {
     render() {
         const boardId = this.props.match.params.id;
         const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName, 
                 editTaskList, onChangeEditedTaskListName, editedTaskListName, isEdited, switchIsEdited, 
-                onChangeEditedBoardId, onChangeEditedTaskListId } = this.props;
+                onChangeEditedBoardId, onChangeEditedTaskListId, newTaskName, onChangeNewTaskName, createTask, removeTask } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
-        const settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1
-        };
         return (
             <React.Fragment>
                 <div className="tasklists__title-container">
@@ -47,6 +42,11 @@ export default class TaskLists extends Component {
                                         switchIsEdited={switchIsEdited}
                                         onChangeEditedBoardId={onChangeEditedBoardId}
                                         onChangeEditedTaskListId={onChangeEditedTaskListId}
+                                        newTaskName={newTaskName}
+                                        onChangeNewTaskName={onChangeNewTaskName}
+                                        createTask={createTask}
+                                        boards={boards}
+                                        removeTask={removeTask}
                                     />
                                 )
                             })

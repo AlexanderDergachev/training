@@ -7,3 +7,7 @@ export const CREATE_TASKLIST = 'CREATE_TASKLIST';
 export const REMOVE_TASKLIST = 'REMOVE_TASKLIST';
 
 export const EDIT_TASKLIST = 'EDIT_TASKLIST';
+
+export const CREATE_TASK = 'CREATE_TASK';
+
+export const REMOVE_TASK = 'REMOVE_TASK';
