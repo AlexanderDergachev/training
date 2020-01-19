@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 import TaskListCreator from '../TaskListCreator/TaskListCreator'
 import './TaskLists.css';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import SingleTaskList from '../SingleTaskList/SingleTaskList';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick";
-import EditPanel from '../EditPanel/EditPanel';
-import {settings} from '../../carousel_settings.js'
+import { settings } from '../../carousel_settings.js'
+import Modal from '../Modal/Modal';
 
 
 export default class TaskLists extends Component {
     render() {
         const boardId = this.props.match.params.id;
-        const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName, 
-                editTaskList, onChangeEditedTaskListName, editedTaskListName, isEdited, switchIsEdited, 
-                onChangeEditedBoardId, onChangeEditedTaskListId, newTaskName, onChangeNewTaskName, createTask, removeTask } = this.props;
+        const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName,
+            editTaskList, onChangeEditedTaskListName, editedTaskListName, isEdited, switchIsEdited,
+            onChangeEditedBoardId, onChangeEditedTaskListId, newTaskName, onChangeNewTaskName, createTask, removeTask } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         return (
             <React.Fragment>
@@ -33,9 +33,9 @@ export default class TaskLists extends Component {
                         {
                             board.tasklists && board.tasklists.map(tasklist => {
                                 return (
-                                    <SingleTaskList 
+                                    <SingleTaskList
                                         boardId={boardId}
-                                        key={tasklist.id} 
+                                        key={tasklist.id}
                                         name={tasklist.name}
                                         id={tasklist.id}
                                         removeTaskList={removeTaskList}
@@ -53,13 +53,16 @@ export default class TaskLists extends Component {
                         }
                     </Slider>
                 </div>
-                <EditPanel 
-                    isEdited={isEdited}
-                    switchIsEdited={switchIsEdited}
-                    editedTaskListName={editedTaskListName}
-                    onChangeEditedTaskListName={onChangeEditedTaskListName}
-                    editTaskList={editTaskList}
-                />
+                {
+                    <Modal
+                        inputValue={editedTaskListName}
+                        onClose={switchIsEdited}
+                        onChange={onChangeEditedTaskListName}
+                        inputPlaceholder="enter new name"
+                        editTaskList={editTaskList}
+                        isEdited={isEdited}
+                    />
+                }
             </React.Fragment>
         )
     }

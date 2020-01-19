@@ -1,20 +1,30 @@
-.edit-panel {
+.modal__overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    position: fixed;
+    z-index: 10001;
+    top: 0;
+    /* bottom: 0; */
+    left: 0;
+    /* right: 0; */
+}
+
+.modal {
     position: absolute;
     width: 700px;
     height: 150px;
-    top: 20%;
-    margin: 15px auto;
-    left: 0; 
-    right: 0;
-
-    
-    z-index: 1;
     background-color: rgb(87, 173, 207);
     opacity: 0.92;
     border-radius: 8px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
-.edit-panel__input {
+.modal__input {
     width: 92%;
     min-height: 50px;
     background-color: #fff;
@@ -25,13 +35,13 @@
     margin-left: 2%;
 }
 
-.edit-panel__button-container {
+.modal__button-container {
     display: flex;
     justify-content: space-evenly;
     margin-top: 3%;
 }
 
-.edit-panel__close, .edit-panel__rename{
+.modal__close, .modal__rename{
     color: #fff;
     font-size: 30px;
     border-radius: 6px;
@@ -39,7 +49,7 @@
 
 }
 
-.tasklists__edit-rename {
+.modal__rename {
     border: 2px solid #fff;
     transition: transform 0.1s;
     color: rgb(119, 119, 119);
@@ -47,6 +57,6 @@
 
 }
 
-.tasklists__edit-rename:hover {
+.modal__rename:hover {
     transform: scale(1.1);
 }
