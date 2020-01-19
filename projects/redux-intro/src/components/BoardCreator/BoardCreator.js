@@ -13,19 +13,19 @@ export default class BoardCreator extends Component {
         }));
 
     }
-    createBoard = () => {
-        const { createBoard } = this.props;
-        createBoard();
+    handleSubmit = () => {
+        const { onSubmit } = this.props;
+        onSubmit();
         this.inputRef.current.focus();
     }
     handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            this.createBoard();
+            this.handleSubmit();
         }
     }
     render() {
         const { isOpen } = this.state;
-        const { onChangeCreateBoardInput, newBoardName} = this.props
+        const { onChangeInput, inputValue } = this.props
         let boardCreator;
         if (isOpen) {
             boardCreator = (
@@ -35,10 +35,17 @@ export default class BoardCreator extends Component {
                         <span onClick={this.handleBoardCreator}>&#8855;</span>
                     </div>
                     <h4 className="board-creator__subtitle">How we can call your board?</h4>
-                    <input value={newBoardName} onKeyPress={this.handleKeyPress} ref={this.inputRef} onChange={onChangeCreateBoardInput} className="board-creator__input" type="text" />
+                    <input
+                        value={inputValue}
+                        onKeyPress={this.handleKeyPress}
+                        ref={this.inputRef}
+                        onChange={onChangeInput}
+                        className="board-creator__input"
+                        type="text"
+                    />
                     <div className="board-creator__button-container">
                         <button onClick={this.handleBoardCreator} className="board-creator__close">cansel</button>
-                        <button onClick={this.createBoard} className="board-creator__create">create</button>
+                        <button onClick={this.handleSubmit} className="board-creator__create">create</button>
                     </div>
                 </div>
             );

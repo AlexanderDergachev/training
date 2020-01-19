@@ -3,10 +3,7 @@ import TaskListCreator from '../TaskListCreator/TaskListCreator'
 import './TaskLists.css';
 import { Link } from 'react-router-dom'
 import SingleTaskList from '../SingleTaskList/SingleTaskList';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css"
-import Slider from "react-slick";
-import { settings } from '../../carousel_settings.js'
+import SliderWrapper from '../SliderWrapper/SliderWrapper'
 import Modal from '../Modal/Modal';
 
 
@@ -29,7 +26,7 @@ export default class TaskLists extends Component {
                         id={boardId}
                         newTaskListName={newTaskListName}
                     />
-                    <Slider {...settings} className="tasklists__carousel">
+                    <SliderWrapper>
                         {
                             board.tasklists && board.tasklists.map(tasklist => {
                                 return (
@@ -51,7 +48,7 @@ export default class TaskLists extends Component {
                                 )
                             })
                         }
-                    </Slider>
+                    </SliderWrapper>
                 </div>
                 {
                     <Modal

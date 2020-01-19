@@ -9,9 +9,9 @@ function BoardList(props) {
     return (
         <div className='board-list'>
             <BoardCreator
-                onChangeCreateBoardInput={onChangeCreateBoardInput}
-                createBoard={createBoard}
-                newBoardName={newBoardName}
+                onChangeInput={onChangeCreateBoardInput}
+                onSubmit={createBoard}
+                inputValue={newBoardName}
             />
             {
                 boards && boards.map(board => {
