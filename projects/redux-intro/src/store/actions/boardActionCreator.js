@@ -1,4 +1,5 @@
-import { CREATE_BOARD, REMOVE_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST, EDIT_TASKLIST, CREATE_TASK, REMOVE_TASK} from '../constants';
+import { CREATE_BOARD, REMOVE_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST,
+        EDIT_TASKLIST, CREATE_TASK, REMOVE_TASK, EDIT_TASK} from '../constants';
 
 export const createBoard = (id, name) => ({
     type: CREATE_BOARD,
@@ -45,4 +46,12 @@ export const removeTask = (board_id, tasklist_id, id) => ({
     board_id,
     tasklist_id,
     id
+})
+
+export const editTask = (board_id, tasklist_id, id, name) => ({
+    type: EDIT_TASK,
+    board_id,
+    tasklist_id,
+    id,
+    name, 
 })

@@ -11,8 +11,9 @@ export default class TaskLists extends Component {
     render() {
         const boardId = this.props.match.params.id;
         const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName,
-            editTaskList, onChangeEditedTaskListName, editedTaskListName, isEdited, switchIsEdited,
-            onChangeEditedBoardId, onChangeEditedTaskListId, newTaskName, onChangeNewTaskName, createTask, removeTask } = this.props;
+            editTaskList, onChangeEditedTaskListName, editedTaskListName, isEditedTaskList, switchIsEdited,
+            onChangeEditedBoardId, onChangeEditedTaskListId, newTaskName, onChangeNewTaskName, createTask,
+            removeTask, onChangeEditedTaskName, editTask, editedTaskName, switchIsEditedTask, isEditedTask, onChangeEditedTaskId } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         return (
             <React.Fragment>
@@ -44,6 +45,10 @@ export default class TaskLists extends Component {
                                         createTask={createTask}
                                         boards={boards}
                                         removeTask={removeTask}
+                                        onChangeEditedTaskName={onChangeEditedTaskName}
+                                        editTask={editTask}
+                                        switchIsEditedTask={switchIsEditedTask}
+                                        onChangeEditedTaskId={onChangeEditedTaskId}
                                     />
                                 )
                             })
@@ -51,14 +56,27 @@ export default class TaskLists extends Component {
                     </SliderWrapper>
                 </div>
                 {
-                    <Modal
-                        inputValue={editedTaskListName}
-                        onClose={switchIsEdited}
-                        onChange={onChangeEditedTaskListName}
-                        inputPlaceholder="enter new name"
-                        editTaskList={editTaskList}
-                        isEdited={isEdited}
-                    />
+                    <>
+                        <Modal
+                            inputValue={editedTaskListName}
+                            onClose={switchIsEdited}
+                            onChange={onChangeEditedTaskListName}
+                            inputPlaceholder="enter new list name"
+                            editTaskList={editTaskList}
+                            isEdited={isEditedTaskList}
+                        />
+                        <Modal
+                            inputValue={editedTaskName}
+                            onClose={switchIsEditedTask}
+                            onChange={onChangeEditedTaskName}
+                            inputPlaceholder="enter new task name"
+                            editFoo={editTask}
+                            isEdited={isEditedTask}
+                        />
+                    </>
+                }
+                {
+
                 }
             </React.Fragment>
         )

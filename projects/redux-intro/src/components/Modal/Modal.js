@@ -2,7 +2,7 @@ import React from 'react'
 import Portal from '../Portal'
 import './Modal.css'
 const Modal = ({
-    inputValue, onChange, inputPlaceholder, onClose, editTaskList, isEdited
+    inputValue, onChange, inputPlaceholder, onClose, editFoo, isEdited
 }) => {
     function onKeyPress(e) {
         if (e.key === 'Enter') {
@@ -10,7 +10,7 @@ const Modal = ({
         }
     }
     function onSubmit() {
-        editTaskList();
+        editFoo();
         onClose();
     }
 

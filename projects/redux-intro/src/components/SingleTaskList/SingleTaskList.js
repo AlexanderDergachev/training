@@ -21,7 +21,8 @@ export default class SingleTaskList extends Component {
         }
     }
     render() {
-        const { name, id, removeTaskList, boardId, onChangeNewTaskName, newTaskName, boards, removeTask } = this.props;
+        const { name, id, removeTaskList, boardId, onChangeNewTaskName,  onChangeEditedBoardId, onChangeEditedTaskListId,
+                newTaskName, boards, removeTask, switchIsEditedTask, onChangeEditedTaskId } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         const tasklist = board.tasklists.filter(tasklist => tasklist.id === +id)[0];
         const tasks = tasklist.tasks;
@@ -59,6 +60,10 @@ export default class SingleTaskList extends Component {
                                 removeTask={removeTask}
                                 boardId={boardId}
                                 tasklistId={id}
+                                switchIsEditedTask={switchIsEditedTask}
+                                onChangeEditedTaskId={onChangeEditedTaskId}
+                                onChangeEditedBoardId={onChangeEditedBoardId}
+                                onChangeEditedTaskListId={onChangeEditedTaskListId}
                             />
                         )
                     })

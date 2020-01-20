@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
-import { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask } from './store/actions/boardActionCreator';
+import { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask } from './store/actions/boardActionCreator';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TaskLists from './components/TasksLists/TaskLists';
 
@@ -13,8 +13,11 @@ class App extends Component {
     editedTaskListName: '',
     editedTaskListId: '',
     editedBoardId: '',
-    isEdited: false,
+    isEditedTaskList: false,
     newTaskName: '',
+    editedTaskName: '',
+    editedTaskId: '',
+    isEditedTask: false
   }
 
   onChangeCreateBoardInput = e => {
@@ -34,14 +37,22 @@ class App extends Component {
     })
   }
   onChangeEditedTaskListId = value => {
-    this.setState({editedTaskListId: value});
+    this.setState({ editedTaskListId: value });
   }
 
   onChangeEditedBoardId = value => {
-    this.setState({editedBoardId: value});
+    this.setState({ editedBoardId: value });
   }
   onChangeNewTaskName = e => {
-    this.setState({newTaskName: e.target.value});
+    this.setState({ newTaskName: e.target.value });
+  }
+
+  onChangeEditedTaskName = e => {
+    this.setState({ editedTaskName: e.target.value });
+  }
+
+  onChangeEditedTaskId = value => {
+    this.setState({ editedTaskId: value });
   }
 
   createBoard = () => {
@@ -59,24 +70,32 @@ class App extends Component {
   }
 
   editTaskList = () => {
-    this.setState({ newTaskListName: '' })
     const { editTaskList } = this.props;
-    const {editedBoardId, editedTaskListId, editedTaskListName} = this.state;
+    const { editedBoardId, editedTaskListId, editedTaskListName } = this.state;
     editTaskList(editedBoardId, editedTaskListId, editedTaskListName);
-    this.setState({editedTaskListName: ''});
+    this.setState({ editedTaskListName: '' });
   }
   switchIsEdited = () => {
-    this.setState({ isEdited: !this.state.isEdited });
+    this.setState({ isEditedTaskList: !this.state.isEditedTaskList });
   }
   createTask = (board_id, tasklist_id) => {
     const { createTask } = this.props;
     const { newTaskName } = this.state;
     createTask(board_id, tasklist_id, (new Date().getTime()), newTaskName, false);
-    this.setState({newTaskName: ''});
+    this.setState({ newTaskName: '' });
+  }
+  editTask = () => {
+    const { editTask } = this.props;
+    const { editedBoardId, editedTaskListId, editedTaskId, editedTaskName } = this.state;
+    editTask(editedBoardId, editedTaskListId, editedTaskId, editedTaskName);
+    this.setState({ editedTaskName: '' });
+  }
+  switchIsEditedTask = () => {
+    this.setState({ isEditedTask: !this.state.isEditedTask });
   }
   render() {
     const { removeBoard, boards, getBoardById, removeTaskList, removeTask } = this.props;
-    const {editedTaskListName, isEdited, newTaskListName, newTaskName } = this.state;
+    const { editedTaskListName, isEditedTaskList, newTaskListName, newTaskName, editedTaskName, isEditedTask } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -99,7 +118,7 @@ class App extends Component {
               editTaskList={this.editTaskList}
               newTaskListName={newTaskListName}
               editedTaskListName={editedTaskListName}
-              isEdited={isEdited}
+              isEditedTaskList={isEditedTaskList}
               switchIsEdited={this.switchIsEdited}
               onChangeEditedTaskListId={this.onChangeEditedTaskListId}
               onChangeEditedBoardId={this.onChangeEditedBoardId}
@@ -107,6 +126,12 @@ class App extends Component {
               onChangeNewTaskName={this.onChangeNewTaskName}
               createTask={this.createTask}
               removeTask={removeTask}
+              onChangeEditedTaskName={this.onChangeEditedTaskName}
+              editTask={this.editTask}
+              editedTaskName={editedTaskName}
+              isEditedTask={isEditedTask}
+              switchIsEditedTask={this.switchIsEditedTask}
+              onChangeEditedTaskId={this.onChangeEditedTaskId}
             />)} />
           </Switch>
         </BrowserRouter>
@@ -117,4 +142,4 @@ class App extends Component {
 
 export default connect(state => ({
   boards: state.boards,
-}), { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask})(App);
+}), { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask })(App);
