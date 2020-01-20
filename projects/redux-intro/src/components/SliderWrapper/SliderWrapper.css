@@ -2,3 +2,23 @@
     max-width: 815px;
     margin: 0 auto;
 }
+
+.slick-arrow {
+    position: absolute;
+    top: 14.25%;
+}
+
+.slick-next{
+    right: -4%;
+}
+
+.slick-prev {
+    left:  -6%;
+}
+
+.slick-prev:before, .slick-next:before {
+    border: none;
+    font-size: 40px;
+    color:rgb(152, 211, 235);
+    /* background: red; */
+}

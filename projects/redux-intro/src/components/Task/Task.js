@@ -10,23 +10,26 @@ export default class Task extends Component {
         switchIsEditedTask();
     }
     render() {
-        const { name, removeTask, boardId, tasklistId, id } = this.props;
+        const { name, removeTask, boardId, tasklistId, id, completeTask, isCompleted } = this.props;
+        // console.log(isCompleted);
+        
         return (
-            <div className="task">
+            <div className={isCompleted ? "task task__completed" : "task"}>
                 <label className="task__checkbox-container">
-                    <input type="checkbox" />
+                    <input checked={isCompleted} onChange={() => completeTask(boardId, tasklistId, id)} type="checkbox" />
+
                     <span className="task__checkmark"></span>
                 </label>
                 <div className="task__title">{name}</div>
                 <span
-                    className='task__edit-icon'
+                    className='task__icon'
                     onClick={this.openIsEditedTaskPanel}
                 >
                     &#9998;
                 </span>
                 <span
                     onClick={() => removeTask(boardId, tasklistId, id)}
-                    className='task__remove-icon'
+                    className='task__icon'
                 >
                     &#x2715;
                 </span>

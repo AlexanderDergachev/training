@@ -22,10 +22,11 @@ export default class SingleTaskList extends Component {
     }
     render() {
         const { name, id, removeTaskList, boardId, onChangeNewTaskName,  onChangeEditedBoardId, onChangeEditedTaskListId,
-                newTaskName, boards, removeTask, switchIsEditedTask, onChangeEditedTaskId } = this.props;
+                newTaskName, boards, removeTask, switchIsEditedTask, onChangeEditedTaskId, completeTask } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         const tasklist = board.tasklists.filter(tasklist => tasklist.id === +id)[0];
         const tasks = tasklist.tasks;
+        
         return (
             <div className='single-tasklist'>
                 <h1 className='single-tasklist__title'>{name}</h1>
@@ -50,13 +51,13 @@ export default class SingleTaskList extends Component {
                     className="single-tasklist__input" type="text"
                 />
                 {
-                    tasks.map(task => {
+                    tasks.map(task => {                        
                         return (
                             <Task
                                 key={task.id}
                                 id={task.id}
                                 name={task.name}
-                                isCompleted={task.isCompleted}
+                                isCompleted={task.isСompleted}
                                 removeTask={removeTask}
                                 boardId={boardId}
                                 tasklistId={id}
@@ -64,6 +65,7 @@ export default class SingleTaskList extends Component {
                                 onChangeEditedTaskId={onChangeEditedTaskId}
                                 onChangeEditedBoardId={onChangeEditedBoardId}
                                 onChangeEditedTaskListId={onChangeEditedTaskListId}
+                                completeTask={completeTask}
                             />
                         )
                     })

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
-import { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask } from './store/actions/boardActionCreator';
+import { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask } from './store/actions/boardActionCreator';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TaskLists from './components/TasksLists/TaskLists';
 
@@ -58,15 +58,19 @@ class App extends Component {
   createBoard = () => {
     const { createBoard } = this.props;
     const { newBoardName } = this.state;
-    createBoard((new Date()).getTime(), newBoardName);
-    this.setState({ newBoardName: '' });
+    if (newBoardName.length > 0) {
+      createBoard((new Date()).getTime(), newBoardName);
+      this.setState({ newBoardName: '' });
+    }
   }
 
   createTaskList = (board_id) => {
     const { createTaskList } = this.props;
     const { newTaskListName } = this.state;
-    createTaskList(board_id, (new Date().getTime()), newTaskListName);
-    this.setState({ newTaskListName: '' })
+    if (newTaskListName.length > 0) {
+      createTaskList(board_id, (new Date().getTime()), newTaskListName);
+      this.setState({ newTaskListName: '' })
+    }
   }
 
   editTaskList = () => {
@@ -81,8 +85,10 @@ class App extends Component {
   createTask = (board_id, tasklist_id) => {
     const { createTask } = this.props;
     const { newTaskName } = this.state;
-    createTask(board_id, tasklist_id, (new Date().getTime()), newTaskName, false);
-    this.setState({ newTaskName: '' });
+    if (newTaskName.length > 0) {
+      createTask(board_id, tasklist_id, (new Date().getTime()), newTaskName, false);
+      this.setState({ newTaskName: '' });
+    }
   }
   editTask = () => {
     const { editTask } = this.props;
@@ -94,7 +100,7 @@ class App extends Component {
     this.setState({ isEditedTask: !this.state.isEditedTask });
   }
   render() {
-    const { removeBoard, boards, getBoardById, removeTaskList, removeTask } = this.props;
+    const { removeBoard, boards, getBoardById, removeTaskList, removeTask, completeTask } = this.props;
     const { editedTaskListName, isEditedTaskList, newTaskListName, newTaskName, editedTaskName, isEditedTask } = this.state;
     return (
       <div>
@@ -132,6 +138,7 @@ class App extends Component {
               isEditedTask={isEditedTask}
               switchIsEditedTask={this.switchIsEditedTask}
               onChangeEditedTaskId={this.onChangeEditedTaskId}
+              completeTask={completeTask}
             />)} />
           </Switch>
         </BrowserRouter>
@@ -142,4 +149,4 @@ class App extends Component {
 
 export default connect(state => ({
   boards: state.boards,
-}), { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask })(App);
+}), { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask })(App);

@@ -13,7 +13,8 @@ export default class TaskLists extends Component {
         const { boards, onChangeCreateTaskListInput, createTaskList, removeTaskList, newTaskListName,
             editTaskList, onChangeEditedTaskListName, editedTaskListName, isEditedTaskList, switchIsEdited,
             onChangeEditedBoardId, onChangeEditedTaskListId, newTaskName, onChangeNewTaskName, createTask,
-            removeTask, onChangeEditedTaskName, editTask, editedTaskName, switchIsEditedTask, isEditedTask, onChangeEditedTaskId } = this.props;
+            removeTask, onChangeEditedTaskName, editTask, editedTaskName, switchIsEditedTask, isEditedTask,
+            onChangeEditedTaskId, completeTask } = this.props;
         const board = boards.filter(board => board.id === +boardId)[0];
         return (
             <React.Fragment>
@@ -36,6 +37,7 @@ export default class TaskLists extends Component {
                                         key={tasklist.id}
                                         name={tasklist.name}
                                         id={tasklist.id}
+                                        isCompleted={tasklist.isCompleted}
                                         removeTaskList={removeTaskList}
                                         switchIsEdited={switchIsEdited}
                                         onChangeEditedBoardId={onChangeEditedBoardId}
@@ -49,6 +51,7 @@ export default class TaskLists extends Component {
                                         editTask={editTask}
                                         switchIsEditedTask={switchIsEditedTask}
                                         onChangeEditedTaskId={onChangeEditedTaskId}
+                                        completeTask={completeTask}
                                     />
                                 )
                             })

@@ -9,8 +9,19 @@
     font-weight: normal;
     white-space: normal;
     display: flex;
-    background-color: lightblue;
+    background-color: rgb(152, 211, 235);
 }
+
+.task__completed {
+    background-color: rgb(210, 214, 216);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.task__completed .task__title {
+    text-decoration: line-through;
+}
+
+
 
 .task__title {
     text-align: left;
@@ -39,16 +50,14 @@
     user-select: none;
 }
 
-.task__remove-icon,
-.task__edit-icon {
+.task__icon {
     display: none;
     font-size: 24px;
     cursor: pointer;
     padding-right: 3px;
 }
 
-.task:hover .task__remove-icon,
-.task:hover .task__edit-icon {
+.task:hover .task__icon{
     display: block;
 }
 
