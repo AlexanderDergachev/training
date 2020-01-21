@@ -3,10 +3,11 @@ import Creator from '../Creator/Creator';
 import './BoardList.css';
 import Board from '../Board/Board';
 import '../Board/Board.css';
+import Modal from '../Modal/Modal';
 
 function BoardList(props) {
-    const { onChangeCreateBoardInput, boards, createBoard, removeBoard, newBoardName,
-        newNoteName, onChangeCreateNoteInput, createNote } = props;
+    const { onChangeCreateBoardInput, boards, createBoard, removeBoard, newBoardName, editBoard, isEditedBoard, onChangeEditedBoardId,
+        newNoteName, onChangeCreateNoteInput, createNote, onChangeEditedBoardName, switchIsEdited, editedBoardName } = props;
     return (
         <div className='board-list'>
             <Creator
@@ -31,11 +32,21 @@ function BoardList(props) {
                         <Board
                             removeBoard={removeBoard}
                             id={board.id} key={board.id}
-                            name={board.name}>
-                        </Board>
+                            name={board.name}
+                            switchIsEdited={switchIsEdited}
+                            onChangeEditedBoardId={onChangeEditedBoardId}
+                        />
                     )
                 })
             }
+            <Modal
+                inputValue={editedBoardName}
+                onClose={switchIsEdited}
+                onChange={onChangeEditedBoardName}
+                inputPlaceholder="enter new name"
+                editFoo={editBoard}
+                isEdited={isEditedBoard}
+            />
         </div>
     )
 }

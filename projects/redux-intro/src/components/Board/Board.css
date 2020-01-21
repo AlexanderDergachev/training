@@ -15,7 +15,6 @@
     margin-top: 30px;
     overflow-x: hidden;
     align-self: flex-start;
-
 }
 
 .board:hover {
@@ -34,6 +33,10 @@
     top: 0;
     transition: transform 0.1s;
     display: none;
+}
+
+.board__icon:nth-child(2) {
+    right: 25px;
 }
 
 .board__icon:hover {

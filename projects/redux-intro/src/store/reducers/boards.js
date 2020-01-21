@@ -1,5 +1,7 @@
-import {CREATE_BOARD, REMOVE_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST, 
-        EDIT_TASKLIST, CREATE_TASK, REMOVE_TASK, EDIT_TASK, COMPLETE_TASK } from '../constants';
+import {
+    CREATE_BOARD, REMOVE_BOARD, EDIT_BOARD, CREATE_TASKLIST, REMOVE_TASKLIST,
+    EDIT_TASKLIST, CREATE_TASK, REMOVE_TASK, EDIT_TASK, COMPLETE_TASK
+} from '../constants';
 import { load } from 'redux-localstorage-simple';
 
 let BOARDS = load({ namespace: 'redux-intro' });
@@ -20,6 +22,13 @@ const boards = (state = BOARDS.boards, { id, name, type, board_id, tasklist_id, 
                     tasklists: []
                 }
             ];
+        case EDIT_BOARD:
+            return [...state].map(board => {
+                if (board.id === id) {
+                    board.name = name
+                }
+                return board;
+            })
         case REMOVE_BOARD:
             return [...state].filter(board =>
                 board.id !== id
@@ -101,20 +110,20 @@ const boards = (state = BOARDS.boards, { id, name, type, board_id, tasklist_id, 
                 return { id: board.id, name: board.name, tasklists: board.tasklists }
             })
         case COMPLETE_TASK:
-                return [...state].map(board => {
-                    if (board.id === +board_id) {
-                        board.tasklists.forEach(tasklist => {
-                            if (tasklist.id === tasklist_id) {
-                                tasklist.tasks.forEach(task => {
-                                    if (task.id === id) {
-                                        task.isСompleted = !task.isСompleted;
-                                    }
-                                })
-                            }
-                        })
-                    }
-                    return { id: board.id, name: board.name, tasklists: board.tasklists }
-                })
+            return [...state].map(board => {
+                if (board.id === +board_id) {
+                    board.tasklists.forEach(tasklist => {
+                        if (tasklist.id === tasklist_id) {
+                            tasklist.tasks.forEach(task => {
+                                if (task.id === id) {
+                                    task.isСompleted = !task.isСompleted;
+                                }
+                            })
+                        }
+                    })
+                }
+                return { id: board.id, name: board.name, tasklists: board.tasklists }
+            })
         default:
             return state;
     }

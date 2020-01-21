@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Task.css';
 export default class Task extends Component {
-    openIsEditedTaskPanel = () => {
+    openEditTaskPanel = () => {
         const { switchIsEditedTask, boardId, tasklistId, id,
             onChangeEditedBoardId, onChangeEditedTaskListId, onChangeEditedTaskId } = this.props;
         onChangeEditedBoardId(boardId);
@@ -10,9 +10,7 @@ export default class Task extends Component {
         switchIsEditedTask();
     }
     render() {
-        const { name, removeTask, boardId, tasklistId, id, completeTask, isCompleted } = this.props;
-        // console.log(isCompleted);
-        
+        const { name, removeTask, boardId, tasklistId, id, completeTask, isCompleted } = this.props;        
         return (
             <div className={isCompleted ? "task task__completed" : "task"}>
                 <label className="task__checkbox-container">
@@ -23,7 +21,7 @@ export default class Task extends Component {
                 <div className="task__title">{name}</div>
                 <span
                     className='task__icon'
-                    onClick={this.openIsEditedTaskPanel}
+                    onClick={this.openEditTaskPanel}
                 >
                     &#9998;
                 </span>
