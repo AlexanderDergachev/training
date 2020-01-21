@@ -3,6 +3,7 @@ import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
 import { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask } from './store/actions/boardActionCreator';
+import { createNote } from './store/actions/noteActionCreator'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TaskLists from './components/TasksLists/TaskLists';
 
@@ -17,12 +18,19 @@ class App extends Component {
     newTaskName: '',
     editedTaskName: '',
     editedTaskId: '',
-    isEditedTask: false
+    isEditedTask: false,
+    newNoteName: '',
   }
 
   onChangeCreateBoardInput = e => {
     this.setState({
       newBoardName: e.target.value
+    })
+  }
+
+  onChangeCreateNoteInput = e => {
+    this.setState({
+      newNoteName: e.target.value
     })
   }
 
@@ -99,9 +107,18 @@ class App extends Component {
   switchIsEditedTask = () => {
     this.setState({ isEditedTask: !this.state.isEditedTask });
   }
+  createNote = () => {
+    const { createNote } = this.props;
+    const { newNoteName } = this.state;
+    if (newNoteName.length > 0) {
+      createNote((new Date()).getTime(), newNoteName);
+      this.setState({ newNoteName: '' });
+    }
+  }
   render() {
     const { removeBoard, boards, getBoardById, removeTaskList, removeTask, completeTask } = this.props;
-    const { editedTaskListName, isEditedTaskList, newTaskListName, newTaskName, editedTaskName, isEditedTask } = this.state;
+    const { editedTaskListName, isEditedTaskList, newTaskListName, newTaskName, editedTaskName,
+      isEditedTask, newNoteName, newBoardName } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -111,7 +128,10 @@ class App extends Component {
               createBoard={this.createBoard}
               removeBoard={removeBoard}
               boards={boards}
-              newBoardName={this.state.newBoardName}
+              newBoardName={newBoardName}
+              onChangeCreateNoteInput={this.onChangeCreateNoteInput}
+              newNoteName={newNoteName}
+              createNote={this.createNote}
             />)} />
             <Route path='/:id' render={((matchProps) => <TaskLists
               {...matchProps}
@@ -149,4 +169,5 @@ class App extends Component {
 
 export default connect(state => ({
   boards: state.boards,
-}), { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask })(App);
+  notes: state.notes
+}), { createBoard, removeBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask, createNote })(App);
