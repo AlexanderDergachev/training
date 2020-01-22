@@ -3,9 +3,10 @@ import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
 import { createBoard, removeBoard, editBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask } from './store/actions/boardActionCreator';
-import { createNote } from './store/actions/noteActionCreator'
+import { createNote, removeNote, editNote } from './store/actions/noteActionCreator'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TaskLists from './components/TasksLists/TaskLists';
+import SingleNote from './SingleNote/SingleNote';
 
 class App extends Component {
   state = {
@@ -22,6 +23,9 @@ class App extends Component {
     isEditedBoard: false,
     newNoteName: '',
     editedBoardName: '',
+    isEditedNote: false,
+    editedNoteName: '',
+    editedNoteId: ''
   }
 
   onChangeCreateBoardInput = e => {
@@ -52,6 +56,7 @@ class App extends Component {
       editedTaskListName: e.target.value
     })
   }
+
   onChangeEditedTaskListId = value => {
     this.setState({ editedTaskListId: value });
   }
@@ -75,7 +80,7 @@ class App extends Component {
     const { editBoard } = this.props;
     const { editedBoardName, editedBoardId } = this.state;
     editBoard(editedBoardId, editedBoardName);
-    this.setState({editedBoardName: ''});
+    this.setState({ editedBoardName: '' });
   }
 
   createBoard = () => {
@@ -102,12 +107,15 @@ class App extends Component {
     editTaskList(editedBoardId, editedTaskListId, editedTaskListName);
     this.setState({ editedTaskListName: '' });
   }
+
   switchIsEdited = () => {
     this.setState({ isEditedTaskList: !this.state.isEditedTaskList });
   }
+
   switchIsEditedBoard = () => {
     this.setState({ isEditedBoard: !this.state.isEditedBoard });
   }
+
   createTask = (board_id, tasklist_id) => {
     const { createTask } = this.props;
     const { newTaskName } = this.state;
@@ -116,15 +124,18 @@ class App extends Component {
       this.setState({ newTaskName: '' });
     }
   }
+
   editTask = () => {
     const { editTask } = this.props;
     const { editedBoardId, editedTaskListId, editedTaskId, editedTaskName } = this.state;
     editTask(editedBoardId, editedTaskListId, editedTaskId, editedTaskName);
     this.setState({ editedTaskName: '' });
   }
+
   switchIsEditedTask = () => {
     this.setState({ isEditedTask: !this.state.isEditedTask });
   }
+
   createNote = () => {
     const { createNote } = this.props;
     const { newNoteName } = this.state;
@@ -133,10 +144,32 @@ class App extends Component {
       this.setState({ newNoteName: '' });
     }
   }
+
+  switchIsEditedNote = () => {
+    this.setState({ isEditedNote: !this.state.isEditedNote });
+  }
+
+  editNote = () => {
+    const { editNote } = this.props;
+    const { editedNoteName, editedNoteId } = this.state;
+    editNote(editedNoteId, editedNoteName);
+    this.setState({ editedNoteName: '' });
+  }
+
+  onChangeEditedNoteName = e => {
+    this.setState({
+      editedNoteName: e.target.value
+    })
+  }
+
+  onChangeEditedNoteId = value => {
+    this.setState({ editedNoteId: value });
+  }
+
   render() {
-    const { removeBoard, boards, getBoardById, removeTaskList, removeTask, completeTask} = this.props;
+    const { removeBoard, boards, getBoardById, removeTaskList, removeTask, completeTask, notes, removeNote } = this.props;
     const { editedTaskListName, isEditedTaskList, newTaskListName, newTaskName, editedTaskName,
-      isEditedTask, newNoteName, newBoardName, editedBoardName, isEditedBoard } = this.state;
+      isEditedTask, newNoteName, newBoardName, editedBoardName, isEditedBoard, editedNoteName, isEditedNote } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -146,18 +179,26 @@ class App extends Component {
               createBoard={this.createBoard}
               removeBoard={removeBoard}
               boards={boards}
+              notes={notes}
               newBoardName={newBoardName}
               onChangeCreateNoteInput={this.onChangeCreateNoteInput}
               newNoteName={newNoteName}
               createNote={this.createNote}
               onChangeEditedBoardName={this.onChangeEditedBoardName}
-              switchIsEdited={this.switchIsEditedBoard}
+              switchIsEditedBoard={this.switchIsEditedBoard}
               editedBoardName={editedBoardName}
               editBoard={this.editBoard}
               isEditedBoard={isEditedBoard}
               onChangeEditedBoardId={this.onChangeEditedBoardId}
+              removeNote={removeNote}
+              switchIsEditedNote={this.switchIsEditedNote}
+              editNote={this.editNote}
+              onChangeEditedNoteName={this.onChangeEditedNoteName}
+              onChangeEditedNoteId={this.onChangeEditedNoteId}
+              editedNoteName={editedNoteName}
+              isEditedNote={isEditedNote}
             />)} />
-            <Route path='/:id' render={((matchProps) => <TaskLists
+            <Route path='/board/:id' render={((matchProps) => <TaskLists
               {...matchProps}
               onChangeCreateTaskListInput={this.onChangeCreateTaskListInput}
               onChangeEditedTaskListName={this.onChangeEditedTaskListName}
@@ -184,6 +225,10 @@ class App extends Component {
               onChangeEditedTaskId={this.onChangeEditedTaskId}
               completeTask={completeTask}
             />)} />
+            <Route path='/note/:id' render={((matchProps) => <SingleNote
+              {...matchProps}
+              notes={notes}
+            />)} />
           </Switch>
         </BrowserRouter>
       </div>
@@ -194,4 +239,7 @@ class App extends Component {
 export default connect(state => ({
   boards: state.boards,
   notes: state.notes
-}), { createBoard, removeBoard, editBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask, createNote })(App);
+}), {
+  createBoard, removeBoard, editBoard, createTaskList, removeTaskList, editTaskList,
+  createTask, removeTask, editTask, completeTask, createNote, removeNote, editNote
+})(App);

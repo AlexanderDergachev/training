@@ -12,7 +12,7 @@ class Board extends React.Component {
         const { name, id, removeBoard } = this.props
         return (
             <div className='board'>
-                <Link className='board__link' to={`/${id}`}>{name}</Link>
+                <Link className='board__link' to={`/board/${id}`}>{name}</Link>
                 <span
                     className='board__icon'
                     onClick={this.openEditPanel}

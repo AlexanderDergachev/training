@@ -1,4 +1,4 @@
-import { CREATE_NOTE } from '../constants'
+import { CREATE_NOTE, REMOVE_NOTE, EDIT_NOTE } from '../constants'
 import { load } from 'redux-localstorage-simple';
 
 
@@ -21,6 +21,17 @@ const notes = (state = NOTES.notes, { id, name, type }) => {
                     text: ''
                 }
             ];
+        case REMOVE_NOTE:
+            return [...state].filter(note =>
+                note.id !== id
+            );
+        case EDIT_NOTE:
+            return [...state].map(note => {
+                if (note.id === id) {
+                    note.name = name
+                }
+                return note;
+            })
         default:
             return state;
     }

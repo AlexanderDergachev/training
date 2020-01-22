@@ -19,3 +19,7 @@ export const EDIT_TASK = 'EDIT_TASK';
 export const COMPLETE_TASK = 'COMPLETE_TASK';
 
 export const CREATE_NOTE = 'CREATE_NOTE';
+
+export const REMOVE_NOTE = 'REMOVE_NOTE';
+
+export const EDIT_NOTE = 'EDIT_NOTE';
