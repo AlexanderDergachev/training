@@ -1,4 +1,4 @@
-import { CREATE_NOTE, REMOVE_NOTE, EDIT_NOTE } from '../constants';
+import { CREATE_NOTE, REMOVE_NOTE, EDIT_NOTE, EDIT_NOTE_TEXT } from '../constants';
 
 
 export const createNote = (id, name) => ({
@@ -16,4 +16,10 @@ export const editNote = (id, name) => ({
     type: EDIT_NOTE,
     id,
     name
+})
+
+export const editNoteText = (id, text) => ({
+    type: EDIT_NOTE_TEXT,
+    id,
+    text
 })

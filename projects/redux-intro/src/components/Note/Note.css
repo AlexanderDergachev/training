@@ -46,6 +46,7 @@
 .note__link {
     color: #fff;
 }
+
 .note__link:before {
     content: '';
     position: absolute;

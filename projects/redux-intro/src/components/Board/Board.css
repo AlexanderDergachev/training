@@ -43,14 +43,6 @@
     transform: scale(1.2);
 }
 
-.visible {
-    visibility: visible;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
 .board__link:before {
     content: '';
     position: absolute;

@@ -3,7 +3,7 @@ import './App.css';
 import BoardList from './components/BoardList/BoardList'
 import { connect } from 'react-redux';
 import { createBoard, removeBoard, editBoard, createTaskList, removeTaskList, editTaskList, createTask, removeTask, editTask, completeTask } from './store/actions/boardActionCreator';
-import { createNote, removeNote, editNote } from './store/actions/noteActionCreator'
+import { createNote, removeNote, editNote, editNoteText } from './store/actions/noteActionCreator'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TaskLists from './components/TasksLists/TaskLists';
 import SingleNote from './SingleNote/SingleNote';
@@ -25,7 +25,9 @@ class App extends Component {
     editedBoardName: '',
     isEditedNote: false,
     editedNoteName: '',
-    editedNoteId: ''
+    editedNoteId: '',
+    isEditedNoteText: false,
+    editedNoteText: '',
   }
 
   onChangeCreateBoardInput = e => {
@@ -166,10 +168,15 @@ class App extends Component {
     this.setState({ editedNoteId: value });
   }
 
+  switchIsEditedNoteText = () => {
+    this.setState({ isEditedNoteText: !this.state.isEditedNoteText });
+  }
+
+
   render() {
-    const { removeBoard, boards, getBoardById, removeTaskList, removeTask, completeTask, notes, removeNote } = this.props;
+    const { removeBoard, boards, getBoardById, removeTaskList, removeTask, completeTask, notes, removeNote, editNoteText } = this.props;
     const { editedTaskListName, isEditedTaskList, newTaskListName, newTaskName, editedTaskName,
-      isEditedTask, newNoteName, newBoardName, editedBoardName, isEditedBoard, editedNoteName, isEditedNote } = this.state;
+      isEditedTask, newNoteName, newBoardName, editedBoardName, isEditedBoard, editedNoteName, isEditedNote, isEditedNoteText } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -228,6 +235,10 @@ class App extends Component {
             <Route path='/note/:id' render={((matchProps) => <SingleNote
               {...matchProps}
               notes={notes}
+              switchIsEditedNote={this.switchIsEditedNote}
+              editNoteText={editNoteText}
+              isEditedNoteText={isEditedNoteText}
+              switchIsEditedNoteText={this.switchIsEditedNoteText}
             />)} />
           </Switch>
         </BrowserRouter>
@@ -241,5 +252,5 @@ export default connect(state => ({
   notes: state.notes
 }), {
   createBoard, removeBoard, editBoard, createTaskList, removeTaskList, editTaskList,
-  createTask, removeTask, editTask, completeTask, createNote, removeNote, editNote
+  createTask, removeTask, editTask, completeTask, createNote, removeNote, editNote, editNoteText
 })(App);

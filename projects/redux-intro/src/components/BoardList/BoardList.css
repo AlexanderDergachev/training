@@ -5,7 +5,28 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
   align-content: flex-start;
-  justify-items: start;
+}
+
+@media screen and (max-width: 950px) {
+  .board-list {
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .board-list div{
+    /* flex-direction: column; */
+    width: 47%;
+  }  
+}
+
+@media screen and (max-width: 490px) {
+  .board-list {
+    flex-direction: column;
+    align-content: center;
+  }
+  .board-list div{
+    width: 85%;
+  }  
 }
