@@ -12,11 +12,13 @@
   .board-list {
     max-width: 95%;
   }
+  .board-list div:hover{
+    transform: unset;
+  }  
 }
 
 @media screen and (max-width: 800px) {
   .board-list div{
-    /* flex-direction: column; */
     width: 47%;
   }  
 }

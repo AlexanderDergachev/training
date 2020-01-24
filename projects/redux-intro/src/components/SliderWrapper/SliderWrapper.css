@@ -21,3 +21,9 @@
     font-size: 40px;
     color:rgb(152, 211, 235);
 }
+
+@media screen and (max-width: 950px) {
+    .slick-next, .slick-prev{
+        display: none !important;        
+    }
+}
