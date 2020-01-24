@@ -27,7 +27,6 @@
 @media screen and (max-width: 400px) {
     .tasklist-creator {
         width: 360px;
-
     }
 
     .tasklist-creator__input {

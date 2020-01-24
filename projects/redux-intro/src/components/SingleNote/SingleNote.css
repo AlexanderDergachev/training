@@ -53,11 +53,11 @@
 .single-note__text::before {
     content: '';
     position: absolute;
-    /* display: block;
+    display: block;
     top: 0px;
     left: 0px;
     right: 0px;
-    bottom: 0px; */
+    bottom: 0px;
 }
 
 .single-note__text-container {
@@ -69,4 +69,16 @@
     border-radius: 8px;
     position: relative;
 
+}
+
+@media screen and (max-width: 800px) {
+    .single-note__text-editor {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .single-note__submit {
+        margin-left: 20%;
+    }
 }

@@ -6,7 +6,7 @@ import { createBoard, removeBoard, editBoard, createTaskList, removeTaskList, ed
 import { createNote, removeNote, editNote, editNoteText } from './store/actions/noteActionCreator'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TaskLists from './components/TasksLists/TaskLists';
-import SingleNote from './SingleNote/SingleNote';
+import SingleNote from './components/SingleNote/SingleNote';
 
 class App extends Component {
   state = {

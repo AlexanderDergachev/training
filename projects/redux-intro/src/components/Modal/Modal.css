@@ -10,7 +10,7 @@
 
 .modal {
     position: absolute;
-    width: 700px;
+    width: 50%;
     height: 150px;
     background-color: rgb(87, 173, 207);
     opacity: 1;
@@ -44,7 +44,6 @@
     font-size: 30px;
     border-radius: 6px;
     width: 25%;
-
 }
 
 .modal__rename {
@@ -57,4 +56,30 @@
 
 .modal__rename:hover {
     transform: scale(1.1);
+}
+
+@media screen and (max-width: 1050px) {
+    .modal {
+        width: 75%;
+    }
+}
+@media screen and (max-width: 650px) {
+    .modal {
+        height: 120px;
+    }
+    .modal__rename{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .modal{
+
+        width: 90%;
+    }
+}
+@media screen and (max-width: 350px) {
+    .modal__rename{
+        margin-left: 15px;
+    }
 }

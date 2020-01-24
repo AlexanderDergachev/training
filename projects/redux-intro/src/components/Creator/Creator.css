@@ -117,6 +117,17 @@
 
     }
     .creator__button-container {
+        margin-left: 25%;
+    }
+    .creator__create {
+        width: 100%;
+        margin-left: 20%;
+    }
+}
+
+@media screen and (max-width: 490px) {
+
+    .creator__button-container {
         margin-left: 10%;
     }
     .creator__create {
