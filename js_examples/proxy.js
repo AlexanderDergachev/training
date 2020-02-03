@@ -1,3 +1,4 @@
+//object
 person = {
     name: 'tom',
     age: 12,
@@ -6,7 +7,12 @@ person = {
 
 const op = new Proxy(person, {
     get(target, prop) {
-        console.log('Your prop:', prop);
+        if (!(prop in target)) {
+            return prop
+                .split('_')
+                .map(p => target[p])
+                .join(' ')
+        }
         return target[prop];
     },
     set(target, prop, value) {
@@ -37,3 +43,68 @@ const op = new Proxy(person, {
 
 // delete op.age;
 // console.log(op);
+
+// console.log(op.age_name_gender);
+
+
+// func
+
+const sum = (a, b) => a + b;
+
+const fp = new Proxy(sum, {
+    apply(target, thisArg, args) {
+        console.log('Calling sum');
+        return target.apply(thisArg, args);
+    }
+})
+
+// console.log(fp(1, 10));
+
+//Classes
+
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+const PersonProxy = new Proxy(Person, {
+    construct(target, args) {
+        console.log('construct');
+        return new Proxy(new target(...args), {
+            get(t, prop) {
+                console.log(`Getting prop ${prop}`);
+                return t[prop]
+            }
+        })
+    }
+})
+
+// const p = new PersonProxy('Alexander', 20);
+
+// console.log(p.name);
+
+
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+    getName() {
+        return this.name
+    };
+
+}
+
+class Dog extends Animal {
+    bark() {
+        return `Dog ${this.name} is barking`
+    }
+}
+// var dog = new Dog ('Aban');
+// console.log(dog.getName () === 'Aban');
+//  // true
+
+// console.log(dog.bark () === 'Dog Aban is barking');
+ // true
+ 
