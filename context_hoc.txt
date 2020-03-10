@@ -1,0 +1,14 @@
+hoc context
+
+
+const WithMainContextHOC = (Component) => {
+  return (props) => {
+      return (
+          <MainContext.Consumer>
+              {({getId, sortBy, filterBy}) =>{
+                  return <Component {...props} getId={getId} sortBy={sortBy} filterBy={filterBy} />
+              }} 
+          </MainContext.Consumer>
+      )
+  }
+}
